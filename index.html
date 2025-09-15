@@ -1,173 +1,104 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>CEH Practice Pages</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --font: 'Inter', sans-serif;
-      --bg:#0b0d10; --card:#12151a; --muted:#8a97a7; --text:#eaf1fb; --accent:#4fd1c5; --border:#1f2530;
-    }
-    [data-theme="blue"]  { --accent:#4299e1; }
-    [data-theme="purple"]{ --accent:#9f7aea; }
-    [data-theme="amber"] { --accent:#f6ad55; }
-    [data-theme="rose"]  { --accent:#f56565; }
-    [data-theme="lime"]  { --accent:#84cc16; }
-    [data-theme="gray"]  { --accent:#a0aec0; }
-
-    body {
-      margin:0; font:16px/1.5 var(--font); color:var(--text);
-      background:radial-gradient(1200px 1200px at 10% -10%, #16202d 0, #0b0d10 60%);
-      padding:24px; display:flex; justify-content:center;
-    }
-    .container { width:min(980px,100%);}
-    .header { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:16px;}
-    .title { font-size:20px; font-weight:600; }
-    .controls {display:flex; gap:10px; flex-wrap:wrap}
-    select,input,button {
-      background:#0e1116; color:var(--text); border:1px solid var(--border); border-radius:8px; padding:6px 8px; outline:0;
-    }
-    .grid {display:grid; grid-template-columns:repeat(7,1fr); gap:10px; margin-top:10px}
-    .card {
-      background:linear-gradient(180deg,#121821,#10151c); border:1px solid var(--border);
-      border-radius:14px; padding:14px; aspect-ratio:1/1;
-      display:flex; flex-direction:column; justify-content:space-between;
-      cursor:pointer; transition:.15s;
-    }
-    .card:hover { transform:translateY(-2px); border-color:var(--accent); box-shadow:0 6px 18px rgba(0,0,0,.35);}
-    .card h3 {margin:0; font-size:18px;}
-    .range{color:var(--muted); font-size:12px}
-    .go{font-size:12px; padding:6px 8px; border-radius:8px; border:1px solid var(--border);}
-    .panel{display:grid; gap:14px; grid-template-columns:1fr 1fr; margin-top:16px}
-    @media (max-width:900px){.panel{grid-template-columns:1fr}}
-    .box{background:linear-gradient(180deg,#11161e,#0f141b); border:1px solid var(--border); border-radius:14px; padding:14px;}
-    .box h4{margin:0 0 8px 0;}
-    .ready{display:inline-flex; align-items:center; gap:8px; border:1px dashed var(--border); padding:8px 10px; border-radius:10px; cursor:pointer;}
-    .badge{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent);}
-    .timer{font-variant-numeric:tabular-nums; font-size:18px; margin-left:8px}
-    textarea{width:100%; min-height:160px; resize:vertical; background:#0b1016; color:var(--text); border:1px solid var(--border); border-radius:10px; padding:10px;}
-    .notes-tabs{display:flex; gap:6px; flex-wrap:wrap; margin:8px 0}
-    .tab{padding:6px 10px; border-radius:10px; border:1px solid var(--border); cursor:pointer;}
-    .tab.active{background:#0f151e; border-color:var(--accent);}
-    .addtab{border:1px dashed var(--border); background:#0c1016; cursor:pointer;}
-
-    /* Cursor styles */
-    .cursor-dot,.cursor-comet,.cursor-ring {position:fixed; pointer-events:none; transform:translate(-50%,-50%);}
-    .cursor-dot {width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.75;animation:fade .6s ease-out forwards;}
-    .cursor-comet{width:10px;height:10px;border-radius:50%;background:var(--accent);filter:blur(1px);opacity:.6;animation:fade .9s ease-out forwards;}
-    .cursor-ring{width:18px;height:18px;border:2px solid var(--accent);border-radius:50%;opacity:.9;animation:ringFade .45s ease-out forwards;}
-    @keyframes fade{to{opacity:0; transform:translate(-50%,-50%) scale(0.5)}}
-    @keyframes ringFade{to{opacity:0; transform:translate(-50%,-50%) scale(1.8)}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEH Practice Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font:System-UI,Segoe UI,Roboto,Inter,Arial,sans-serif;
+  --bg:#0b0d10; --card:#12151a; --muted:#8a97a7; --text:#eaf1fb; --accent:#4fd1c5; --border:#1f2530;
+}
+body{margin:0; font:16px/1.5 var(--font); background:var(--bg); color:var(--text); display:flex; justify-content:center; padding:24px;}
+.container{width:min(980px,100%);}
+.header{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:16px;}
+.title{font-size:20px; font-weight:600;}
+.controls{display:flex; gap:10px; flex-wrap:wrap}
+select,input{background:#0e1116; color:var(--text); border:1px solid var(--border); border-radius:8px; padding:6px 8px;}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:12px; margin-top:10px}
+.card{cursor:pointer; border-radius:14px; padding:20px; display:flex; flex-direction:column; justify-content:center; align-items:center;
+      background:linear-gradient(180deg,#121821,#10151c); border:1px solid var(--border); transition:transform .1s ease, box-shadow .2s ease}
+.card:hover{transform:translateY(-3px); box-shadow:0 6px 18px rgba(0,0,0,.35);}
+.card h3{margin:0; font-size:18px; font-weight:600}
+.range{color:var(--muted); font-size:12px; margin-top:4px}
+.panel{display:grid; gap:14px; grid-template-columns:1fr 1fr; margin-top:16px}
+.box{background:linear-gradient(180deg,#11161e,#0f141b); border:1px solid var(--border); border-radius:14px; padding:14px;}
+.ready{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:10px; cursor:pointer; user-select:none; border:1px dashed #2a3342;}
+.badge{width:10px; height:10px; border-radius:50%; box-shadow:0 0 8px var(--accent);}
+.badge.green{background:#3ac569;}
+.badge.red{background:#e05656;}
+.timer{font-variant-numeric:tabular-nums; font-size:18px; margin-left:6px}
+.notes-tabs{display:flex; gap:6px; flex-wrap:wrap; margin:8px 0}
+.tab{padding:6px 10px; border-radius:10px; border:1px solid var(--border); background:#0c1016; cursor:pointer; font-size:13px}
+.tab.active{border-color:#4fd1c5; box-shadow:0 0 6px #4fd1c5;}
+.addtab{border:1px dashed #2a3342; background:#0c1016;}
+textarea{width:100%; min-height:160px; resize:vertical; background:#0b1016; color:var(--text); border:1px solid var(--border); border-radius:10px; padding:10px;}
+</style>
 </head>
 <body>
 <div class="container">
   <div class="header">
     <div class="title">CEH Practice Pages</div>
     <div class="controls">
-      <label>Font:
-        <select id="fontSel">
-          <option value="'Inter',sans-serif">Inter</option>
-          <option value="'Poppins',sans-serif">Poppins</option>
-          <option value="'Roboto',sans-serif">Roboto</option>
-          <option value="system-ui,sans-serif">System</option>
-        </select>
-      </label>
-      <label>Theme:
-        <select id="themeSel">
-          <option value="default">Default (Teal)</option>
-          <option value="blue">Blue</option>
-          <option value="purple">Purple</option>
-          <option value="amber">Amber</option>
-          <option value="rose">Rose</option>
-          <option value="lime">Lime</option>
-          <option value="gray">Gray</option>
-        </select>
-      </label>
-      <label>Cursor:
-        <select id="cursorSel">
-          <option value="dot">Dot</option>
-          <option value="comet">Comet</option>
-          <option value="ring">Ring</option>
-          <option value="crosshair">Crosshair</option>
-        </select>
-      </label>
-      <label>Bookmark:
-        <input id="bm" type="number" min="1" max="7" style="width:60px">
-      </label>
+      <label>Font: <select id="fontSel">
+        <option value="System-UI,Segoe UI,Roboto,Inter,Arial,sans-serif">System</option>
+        <option value="'Poppins',sans-serif">Poppins</option>
+        <option value="'Roboto',sans-serif">Roboto</option>
+        <option value="'Inter',sans-serif">Inter</option>
+      </select></label>
+      <label>Theme: <select id="themeSel">
+        <option value="teal">Default (Teal)</option>
+        <option value="purple">Purple</option>
+        <option value="blue">Blue</option>
+      </select></label>
+      <label>Cursor: <select id="cursorSel">
+        <option value="off">Static</option>
+        <option value="dot">Dot</option>
+        <option value="comet">Comet</option>
+      </select></label>
+      <label>Bookmark: <input id="bm" type="number" min="1" max="7" style="width:60px"></label>
     </div>
   </div>
-
   <div class="grid" id="grid"></div>
-
   <div class="panel">
-    <div class="box">
+    <div class="box" id="studyBox">
       <h4>Study Session</h4>
-      <div class="ready" id="readyBtn"><span class="badge"></span><span id="readyText">Ready to study!</span><span class="timer" id="timer">00:00:00</span></div>
+      <div class="ready" id="readyBtn"><span class="badge red" id="badge"></span><span id="readyText">Paused</span><span class="timer" id="timer">00:00:00</span></div>
     </div>
     <div class="box">
       <h4>Study Notes</h4>
       <div class="notes-tabs" id="tabs"></div>
-      <textarea id="notes" placeholder="Write notes here..."></textarea>
-      <div id="savedInfo" class="small">Saved.</div>
+      <textarea id="notes" placeholder="Write your notes..."></textarea>
+      <div class="small" id="savedInfo" style="margin-top:6px">Saved.</div>
     </div>
   </div>
 </div>
-
 <script>
 const totalPages=7;
-const questionRanges={1:"Q1-50",2:"Q51-100",3:"Q101-150",4:"Q151-200",5:"Q201-250",6:"Q251-300",7:"Q301-302"};
+const ranges={1:"Q1-50",2:"Q51-100",3:"Q101-150",4:"Q151-200",5:"Q201-250",6:"Q251-300",7:"Q301-302"};
 const grid=document.getElementById('grid');
-for(let i=1;i<=totalPages;i++){
-  const card=document.createElement('div'); card.className='card';
-  card.innerHTML=`<h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div><button class="go">Open</button>`;
-  card.onclick=()=>openPage(i);
-  card.querySelector('.go').onclick=e=>{e.stopPropagation();openPage(i)};
-  grid.appendChild(card);
-}
-async function openPage(n){
-  const long=encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
-  const short=`pages/${n}.html`;
-  location.href=await fetch(long,{method:"HEAD"}).then(r=>r.ok?long:short).catch(()=>short);
-}
-
-// Bookmark
-const bm=document.getElementById('bm');
-bm.value=localStorage.getItem('bookmark')||'';
-bm.addEventListener('change',()=>localStorage.setItem('bookmark',bm.value));
-
-// Timer
-let ticking=false,elapsed=+localStorage.getItem('timer_elapsed')||0,startTs=+localStorage.getItem('timer_start')||0;
-const timerEl=document.getElementById('timer'),readyText=document.getElementById('readyText'),readyBtn=document.getElementById('readyBtn');
+for(let i=1;i<=totalPages;i++){const card=document.createElement('div');card.className='card';
+ card.innerHTML=`<h3>Page ${i}</h3><div class="range">${ranges[i]}</div>`;
+ card.onclick=()=>{location.href=`pages/${i}.html`;};
+ grid.appendChild(card);}
+let ticking=false,elapsed=0,startTs=0,rafId=0;
+const timerEl=document.getElementById('timer'),readyText=document.getElementById('readyText'),badge=document.getElementById('badge');
 function fmt(s){const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),sec=String(Math.floor(s%60)).padStart(2,'0');return `${h}:${m}:${sec}`;}
-function paint(){const now=Date.now();const secs=elapsed+(ticking?(now-startTs)/1000:0);timerEl.textContent=fmt(secs);requestAnimationFrame(paint);}
-function start(){if(ticking)return;ticking=true;startTs=Date.now();localStorage.setItem('timer_start',startTs);readyText.textContent='Studying';}
-function pause(){if(!ticking)return;ticking=false;elapsed+=(Date.now()-startTs)/1000;localStorage.setItem('timer_elapsed',elapsed);localStorage.removeItem('timer_start');readyText.textContent='Paused';}
-function reset(){ticking=false;elapsed=0;localStorage.removeItem('timer_start');localStorage.setItem('timer_elapsed',0);readyText.textContent='Ready to study!';}
-readyBtn.onclick=()=>ticking?pause():start();document.addEventListener('keydown',e=>{if(e.key==='0')reset();if(e.key.toLowerCase()==='r')(ticking?pause():start());});
-paint();
-
-// Notes with tabs
-const notes=document.getElementById('notes'),savedInfo=document.getElementById('savedInfo'),tabsWrap=document.getElementById('tabs');
-function saveTabs(t){localStorage.setItem('note_tabs',JSON.stringify(t));}
-function loadTabs(){let t=JSON.parse(localStorage.getItem('note_tabs')||'[]');if(!t.length)t=['General','Page1','Page2'];return t;}
-function keyFor(n){return 'note_'+n;}
-function renderTabs(){tabsWrap.innerHTML='';tabs.forEach(name=>{const el=document.createElement('button');el.className='tab'+(name===active?' active':'');el.textContent=name;el.onclick=()=>{active=name;localStorage.setItem('note_active',active);loadNote();renderTabs();};el.oncontextmenu=e=>{e.preventDefault();const nn=prompt('Rename',name);if(!nn)return;const idx=tabs.indexOf(name);tabs[idx]=nn;if(active===name)active=nn;saveTabs(tabs);localStorage.setItem('note_active',active);renderTabs();loadNote();};tabsWrap.appendChild(el);});const add=document.createElement('button');add.className='addtab';add.textContent='+ Add';add.onclick=()=>{const nn=prompt('New tab');if(!nn)return;tabs.push(nn);saveTabs(tabs);active=nn;localStorage.setItem('note_active',active);renderTabs();loadNote();};tabsWrap.appendChild(add);}
+function paint(){const now=Date.now();const secs=elapsed+(ticking?(now-startTs)/1000:0);timerEl.textContent=fmt(secs);rafId=requestAnimationFrame(paint);}
+function start(){if(ticking)return;ticking=true;startTs=Date.now();readyText.textContent="Studying";badge.className="badge green";}
+function pause(){if(!ticking)return;ticking=false;elapsed+=(Date.now()-startTs)/1000;readyText.textContent="Paused";badge.className="badge red";}
+document.getElementById('readyBtn').onclick=()=>ticking?pause():start();paint();
+// Notes
+const notes=document.getElementById('notes'),tabsWrap=document.getElementById('tabs'),savedInfo=document.getElementById('savedInfo');
+function keyFor(name){return 'note_'+name;}function saveTabs(t){localStorage.setItem('note_tabs',JSON.stringify(t));}
+function loadTabs(){let t=JSON.parse(localStorage.getItem('note_tabs')||'[]');if(!t.length) t=['General'];return t;}
+let tabs=loadTabs(),active=localStorage.getItem('note_active')||tabs[0];
+function renderTabs(){tabsWrap.innerHTML='';tabs.forEach(name=>{const el=document.createElement('button');el.textContent=name;el.className='tab'+(name===active?' active':'');el.onclick=()=>{active=name;localStorage.setItem('note_active',active);loadNote();renderTabs();};tabsWrap.appendChild(el);});
+const add=document.createElement('button');add.textContent='+ Add';add.className='addtab';add.onclick=()=>{const nn=prompt('New tab');if(!nn)return;tabs.push(nn);saveTabs(tabs);renderTabs();};tabsWrap.appendChild(add);}
 function loadNote(){notes.value=localStorage.getItem(keyFor(active))||'';savedInfo.textContent='Loaded '+active;}
-let tabs=loadTabs(),active=localStorage.getItem('note_active')||tabs[0];renderTabs();loadNote();
-let saveTO;notes.addEventListener('input',()=>{clearTimeout(saveTO);saveTO=setTimeout(()=>{localStorage.setItem(keyFor(active),notes.value);savedInfo.textContent='Saved '+new Date().toLocaleTimeString();},400);});
-
-// Font + Theme
-const fontSel=document.getElementById('fontSel'),themeSel=document.getElementById('themeSel');const root=document.documentElement;
-fontSel.value=localStorage.getItem('fontSel')||fontSel.value;root.style.setProperty('--font',fontSel.value);fontSel.onchange=()=>{localStorage.setItem('fontSel',fontSel.value);root.style.setProperty('--font',fontSel.value);}
-themeSel.value=localStorage.getItem('themeSel')||'default';document.body.setAttribute('data-theme',themeSel.value);themeSel.onchange=()=>{localStorage.setItem('themeSel',themeSel.value);document.body.setAttribute('data-theme',themeSel.value);}
-
-// Cursor
-const cursorSel=document.getElementById('cursorSel');cursorSel.value=localStorage.getItem('cursorSel')||'dot';cursorSel.onchange=()=>{localStorage.setItem('cursorSel',cursorSel.value);}
-let lastDot=0;window.addEventListener('mousemove',e=>{const mode=cursorSel.value,now=performance.now();if(mode==='dot'){if(now-lastDot<18)return;lastDot=now;spawn('cursor-dot',e.clientX,e.clientY,600);}else if(mode==='comet'){if(now-lastDot<28)return;lastDot=now;spawn('cursor-comet',e.clientX,e.clientY,900);}else if(mode==='ring'){spawn('cursor-ring',e.clientX,e.clientY,450);}else if(mode==='crosshair'){document.body.style.cursor='crosshair';}});
-function spawn(cls,x,y,ttl=700){const el=document.createElement('div');el.className=cls;el.style.left=x+'px';el.style.top=y+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),ttl);}
+notes.addEventListener('input',()=>{localStorage.setItem(keyFor(active),notes.value);savedInfo.textContent='Saved '+new Date().toLocaleTimeString();});
+renderTabs();loadNote();
 </script>
 </body>
 </html>
