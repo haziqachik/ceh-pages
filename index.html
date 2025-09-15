@@ -4,33 +4,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CEH Practice Pages</title>
-
-  <!-- Popular fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
   <style>
     :root{
       --font:System-UI,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      --bg:#0b0d10; --bg2:#10141b; --panel:#0e1116;
+      /* base (overridden by theme on <body>) */
+      --bg1:#16202d; --bg2:#0b0d10; --panel:#0e1116;
       --text:#eaf1fb; --muted:#8a97a7; --border:#1f2530;
-      --accent:#4fd1c5; --ring:#26b3a6;
-      --card1:#121821; --card2:#0f151c;
-      --good:#4ade80; --bad:#f87171;
+      --accent:#4fd1c5; --card1:#121821; --card2:#0f151c;
+      --good:#4ade80; --bad:#f87171; --ring:#26b3a6;
     }
-    /* Themes */
-    body[data-theme="teal"]   { --accent:#4fd1c5; --ring:#26b3a6; }
-    body[data-theme="purple"] { --accent:#a78bfa; --ring:#8b5cf6; }
-    body[data-theme="blue"]   { --accent:#60a5fa; --ring:#3b82f6; }
-    body[data-theme="rose"]   { --accent:#fb7185; --ring:#f43f5e; }
-    body[data-theme="amber"]  { --accent:#fbbf24; --ring:#f59e0b; }
-    body[data-theme="emerald"]{ --accent:#34d399; --ring:#10b981; }
-    body[data-theme="slate"]  { --accent:#94a3b8; --ring:#64748b; }
+
+    /* THEMES (background & accent both change) */
+    body[data-theme="teal"]     { --bg1:#13242a; --bg2:#091215; --accent:#4fd1c5; --ring:#26b3a6; --card1:#111a1f; --card2:#0c1317;}
+    body[data-theme="purple"]   { --bg1:#1b1630; --bg2:#0d0b14; --accent:#a78bfa; --ring:#8b5cf6; --card1:#1b1630; --card2:#120f22;}
+    body[data-theme="blue"]     { --bg1:#0f2033; --bg2:#070b12; --accent:#60a5fa; --ring:#3b82f6; --card1:#112033; --card2:#0c1623;}
+    body[data-theme="rose"]     { --bg1:#2a1420; --bg2:#11080c; --accent:#fb7185; --ring:#f43f5e; --card1:#2a1420; --card2:#1a0d14;}
+    body[data-theme="amber"]    { --bg1:#2a230f; --bg2:#120e06; --accent:#fbbf24; --ring:#f59e0b; --card1:#2a230f; --card2:#191406;}
+    body[data-theme="emerald"]  { --bg1:#12241c; --bg2:#08110d; --accent:#34d399; --ring:#10b981; --card1:#11241b; --card2:#0b1813;}
+    body[data-theme="slate"]    { --bg1:#1b212a; --bg2:#0d1014; --accent:#94a3b8; --ring:#64748b; --card1:#1b212a; --card2:#12161d;}
+    body[data-theme="indigo"]   { --bg1:#171b34; --bg2:#0a0b14; --accent:#818cf8; --ring:#6366f1; --card1:#171b34; --card2:#101327;}
+    body[data-theme="cyan"]     { --bg1:#0e2329; --bg2:#061114; --accent:#22d3ee; --ring:#06b6d4; --card1:#0f232a; --card2:#0a191e;}
+    body[data-theme="pink"]     { --bg1:#2a1525; --bg2:#120a11; --accent:#f472b6; --ring:#ec4899; --card1:#2a1525; --card2:#1a0e19;}
+    body[data-theme="graphite"] { --bg1:#202020; --bg2:#0e0e0e; --accent:#cfcfcf; --ring:#9ca3af; --card1:#202020; --card2:#151515;}
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; font:16px/1.5 var(--font); color:var(--text);
-      background: radial-gradient(1200px 1200px at 10% -10%, #16202d 0, var(--bg) 60%);
+      background: radial-gradient(1200px 1200px at 12% -10%, var(--bg1) 0, var(--bg2) 60%);
       display:flex; justify-content:center; align-items:flex-start; padding:24px;
     }
     .container{width:min(1000px,100%);}
@@ -62,42 +64,61 @@
     .panel{display:grid; gap:14px; grid-template-columns:1fr 1fr; margin-top:16px}
     @media (max-width:900px){ .panel{grid-template-columns:1fr} }
 
-    .box{ background:linear-gradient(180deg,#11161e,#0f141b); border:1px solid var(--border); border-radius:14px; padding:14px; }
+    .box{ background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+          border:1px solid var(--border); border-radius:14px; padding:14px; }
     .box h4{margin:0 0 8px 0; font-weight:600}
 
-    .ready{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:10px; background:#0d131b; border:1px dashed #2a3342; user-select:none;}
+    .ready{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:10px; background:rgba(0,0,0,.25);
+      border:1px dashed #2a3342; user-select:none;
+    }
     .badge{display:inline-block; width:8px; height:8px; border-radius:999px; background:var(--accent); box-shadow:0 0 8px var(--accent)}
     .timer{font-variant-numeric:tabular-nums; font-size:18px; margin-left:8px}
     .status-ready{ color:var(--accent); }
     .status-studying{ color:var(--good); }
     .status-paused{ color:var(--bad); }
 
+    /* TAB NOTES */
+    .tabs{display:flex; gap:6px; flex-wrap:wrap; margin:8px 0 10px 0}
+    .tab{
+      padding:6px 10px; border-radius:10px; border:1px solid var(--border);
+      background:var(--panel); cursor:pointer; font-size:13px;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .tab.active{border-color:#2a3342; background:rgba(255,255,255,0.03)}
+    .tab .x{
+      background:transparent; border:0; color:var(--muted); cursor:pointer; padding:0 2px; font-size:14px;
+    }
+    .addtab{padding:6px 10px; border-radius:10px; border:1px dashed #2a3342; background:transparent; cursor:pointer; font-size:13px}
+
     textarea{
       width:100%; min-height:180px; resize:vertical;
       background:#0b1016; color:var(--text); border:1px solid var(--border);
       border-radius:10px; padding:10px; outline:0;
     }
+
     .small{font-size:12px; color:var(--muted)}
     hr{border:0; border-top:1px solid var(--border); margin:10px 0}
 
-    /* cursor */
+    /* cursor options */
     .cursor-dot{position:fixed; pointer-events:none; width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:.75; transform:translate(-50%,-50%); will-change:transform,opacity; animation:fade .6s ease-out forwards}
     .cursor-comet{width:10px; height:10px; filter:blur(0.5px)}
     .cursor-off .cursor-dot{display:none}
     @keyframes fade{to{opacity:0; transform:translate(-50%,-50%) scale(0.5)}}
   </style>
 </head>
-<body>
+<body data-theme="teal">
   <div class="container">
     <div class="header">
       <div class="title">CEH Practice Pages</div>
       <div class="controls">
         <label class="small">Font:
           <select id="fontSel">
-            <option value="system">System</option>
-            <option value="inter">Inter</option>
-            <option value="roboto">Roboto</option>
-            <option value="poppins">Poppins</option>
+            <option value="System-UI,Segoe UI,Roboto,Inter,Arial,sans-serif">System</option>
+            <option value="'Inter',System-UI,Segoe UI,Arial,sans-serif">Inter</option>
+            <option value="'Roboto',System-UI,Segoe UI,Arial,sans-serif">Roboto</option>
+            <option value="'Poppins',System-UI,Segoe UI,Arial,sans-serif">Poppins</option>
           </select>
         </label>
         <label class="small">Theme:
@@ -109,6 +130,10 @@
             <option value="amber">Amber</option>
             <option value="emerald">Emerald</option>
             <option value="slate">Slate</option>
+            <option value="indigo">Indigo</option>
+            <option value="cyan">Cyan</option>
+            <option value="pink">Pink</option>
+            <option value="graphite">Graphite</option>
           </select>
         </label>
         <label class="small">Cursor:
@@ -141,10 +166,11 @@
         <div class="small">Tip: Press <b>R</b> to start/pause, <b>0</b> to reset.</div>
       </div>
 
-      <!-- RIGHT: notes -->
+      <!-- RIGHT: tabbed notes -->
       <div class="box">
         <h4>Study Notes</h4>
-        <textarea id="notes" placeholder="Write your notes (auto-saves to this browser)"></textarea>
+        <div class="tabs" id="tabs"></div>
+        <textarea id="notes" placeholder="Write your notes (auto-saves per tab)"></textarea>
         <div class="small" id="savedInfo" style="margin-top:6px">Saved.</div>
       </div>
     </div>
@@ -154,112 +180,174 @@
   </div>
 
   <script>
-    // ---------- Config ----------
+    /* ---------- Config ---------- */
     const totalPages = 7;
-    const questionRanges = {
-      1:"Q1–50",2:"Q51–100",3:"Q101–150",4:"Q151–200",
-      5:"Q201–250",6:"Q251–300",7:"Q301–302"
-    };
+    const questionRanges = {1:"Q1–50",2:"Q51–100",3:"Q101–150",4:"Q151–200",5:"Q201–250",6:"Q251–300",7:"Q301–302"};
 
-    // ---------- Grid ----------
+    /* ---------- Build grid ---------- */
     const grid = document.getElementById('grid');
-    for(let i=1;i<=totalPages;i++){
-      const card=document.createElement('div');
-      card.className='card'; card.dataset.page=i;
-      card.innerHTML=`<div><h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div></div>`;
+    for (let i=1;i<=totalPages;i++){
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.page = i;
+      card.innerHTML = `<div><h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div></div>`;
       card.addEventListener('click',()=>openPage(i));
       grid.appendChild(card);
     }
 
-    // ---------- Bookmark ----------
-    const bm=document.getElementById('bm');
+    /* Bookmark highlight */
+    const bm = document.getElementById('bm');
     function updateBookmarkHighlight(){
       document.querySelectorAll('.card').forEach(c=>c.classList.remove('bookmarked'));
-      const n=+bm.value;
-      if(n>=1 && n<=totalPages){
-        const el=document.querySelector('.card[data-page="'+n+'"]');
-        if(el) el.classList.add('bookmarked');
+      const n = +bm.value;
+      if (n>=1 && n<=totalPages){
+        const el = document.querySelector('.card[data-page="'+n+'"]');
+        if (el) el.classList.add('bookmarked');
       }
     }
-    bm.value=localStorage.getItem('bookmark')||'';
-    bm.addEventListener('change',()=>{localStorage.setItem('bookmark',bm.value);updateBookmarkHighlight();});
+    bm.value = localStorage.getItem('bookmark') || '';
+    bm.addEventListener('change', ()=>{ localStorage.setItem('bookmark', bm.value); updateBookmarkHighlight(); });
     updateBookmarkHighlight();
 
-    // ---------- Open Page ----------
+    /* ---------- Detect long/short page filename and open ---------- */
     async function openPage(n){
-      const long=encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
-      const short=`pages/${n}.html`;
-      const okLong=await fetch(long,{method:'HEAD'}).then(r=>r.ok).catch(()=>false);
-      if(okLong){location.href=long;return;}
-      const okShort=await fetch(short,{method:'HEAD'}).then(r=>r.ok).catch(()=>false);
-      if(okShort){location.href=short;return;}
+      const long = encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
+      const short = `pages/${n}.html`;
+      const okLong  = await fetch(long,  {method:'HEAD'}).then(r=>r.ok).catch(()=>false);
+      if (okLong)  { location.href = long;  return; }
+      const okShort = await fetch(short, {method:'HEAD'}).then(r=>r.ok).catch(()=>false);
+      if (okShort) { location.href = short; return; }
       alert('Page not found locally.');
     }
 
-    // ---------- Font/Theme/Cursor ----------
-    const root=document.documentElement;
-    const fontSel=document.getElementById('fontSel');
-    const themeSel=document.getElementById('themeSel');
-    const cursorSel=document.getElementById('cursorSel');
+    /* ---------- Font, Theme, Cursor ---------- */
+    const root = document.documentElement;
+    const fontSel = document.getElementById('fontSel');
+    const themeSel = document.getElementById('themeSel');
+    const cursorSel = document.getElementById('cursorSel');
 
     // Font
-    const fontMap={
-      system:"System-UI,Segoe UI,Roboto,Inter,Arial,sans-serif",
-      inter:"'Inter',System-UI,Segoe UI,Arial,sans-serif",
-      roboto:"'Roboto',System-UI,Segoe UI,Arial,sans-serif",
-      poppins:"'Poppins',System-UI,Segoe UI,Arial,sans-serif"
-    };
-    const savedFont=localStorage.getItem('fontSel')||'system';
-    fontSel.value=savedFont; root.style.setProperty('--font',fontMap[savedFont]);
-    fontSel.onchange=()=>{root.style.setProperty('--font',fontMap[fontSel.value]);localStorage.setItem('fontSel',fontSel.value);};
+    fontSel.value = localStorage.getItem('fontSel') || fontSel.value;
+    root.style.setProperty('--font', fontSel.value);
+    fontSel.onchange = ()=>{ root.style.setProperty('--font', fontSel.value); localStorage.setItem('fontSel', fontSel.value); };
 
-    // Theme
-    const savedTheme=localStorage.getItem('themeSel')||'teal';
-    document.body.dataset.theme=savedTheme; themeSel.value=savedTheme;
-    themeSel.onchange=()=>{document.body.dataset.theme=themeSel.value;localStorage.setItem('themeSel',themeSel.value);};
+    // Theme (also changes background now)
+    const savedTheme = localStorage.getItem('themeSel') || 'teal';
+    document.body.dataset.theme = savedTheme;
+    themeSel.value = savedTheme;
+    themeSel.onchange = ()=>{ document.body.dataset.theme = themeSel.value; localStorage.setItem('themeSel', themeSel.value); };
 
     // Cursor
-    function applyCursor(){document.body.classList.toggle('cursor-off',cursorSel.value==='off');}
-    cursorSel.value=localStorage.getItem('cursorSel')||'off';
-    applyCursor(); cursorSel.onchange=()=>{localStorage.setItem('cursorSel',cursorSel.value);applyCursor();};
-    let lastDot=0;
-    window.addEventListener('mousemove',e=>{
-      if(cursorSel.value==='off')return;
-      const now=performance.now(); if(now-lastDot<16)return; lastDot=now;
-      const dot=document.createElement('div');
-      dot.className='cursor-dot'+(cursorSel.value==='comet'?' cursor-comet':'');
-      dot.style.left=e.clientX+'px'; dot.style.top=e.clientY+'px';
+    function applyCursorState(){ document.body.classList.toggle('cursor-off', cursorSel.value==='off'); }
+    cursorSel.value = localStorage.getItem('cursorSel') || 'off';
+    applyCursorState();
+    cursorSel.onchange = ()=>{ localStorage.setItem('cursorSel', cursorSel.value); applyCursorState(); };
+    let lastDot = 0;
+    window.addEventListener('mousemove', e=>{
+      if (cursorSel.value==='off') return;
+      const now = performance.now(); if (now - lastDot < 16) return; lastDot = now;
+      const dot = document.createElement('div');
+      dot.className = 'cursor-dot' + (cursorSel.value==='comet' ? ' cursor-comet' : '');
+      dot.style.left = e.clientX+'px'; dot.style.top = e.clientY+'px';
       document.body.appendChild(dot);
-      setTimeout(()=>dot.remove(),cursorSel.value==='comet'?800:600);
+      setTimeout(()=>dot.remove(), cursorSel.value==='comet' ? 800 : 600);
     });
 
-    // ---------- Timer ----------
-    const readyBtn=document.getElementById('readyBtn');
-    const readyText=document.getElementById('readyText');
-    const timerEl=document.getElementById('timer');
-    const badge=document.getElementById('badge');
-    let startTs=+localStorage.getItem('timer_start')||0;
-    let elapsed=+localStorage.getItem('timer_elapsed')||0;
-    let ticking=false,rafId=0;
-
-    function fmt(s){const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),sec=String(Math.floor(s%60)).padStart(2,'0');return`${h}:${m}:${sec}`;}
-    function paint(){const now=Date.now();const secs=elapsed+(ticking?(now-startTs)/1000:0);timerEl.textContent=fmt(secs);rafId=requestAnimationFrame(paint);}
-    function setStatus(cls,text,color){readyText.className=cls;readyText.textContent=text;badge.style.background=color||getComputedStyle(document.documentElement).getPropertyValue('--accent');badge.style.boxShadow=`0 0 8px ${badge.style.background}`;}
-    function start(){if(ticking)return;ticking=true;startTs=Date.now();localStorage.setItem('timer_start',startTs);setStatus('status-studying','Studying',getComputedStyle(document.documentElement).getPropertyValue('--good'));}
-    function pause(){if(!ticking)return;ticking=false;elapsed+=(Date.now()-startTs)/1000;localStorage.setItem('timer_elapsed',elapsed);localStorage.removeItem('timer_start');setStatus('status-paused','Paused',getComputedStyle(document.documentElement).getPropertyValue('--bad'));}
-    function reset(){ticking=false;elapsed=0;localStorage.removeItem('timer_start');localStorage.setItem('timer_elapsed',0);setStatus('status-ready','Ready to study!','');}
-    readyBtn.addEventListener('click',()=>ticking?pause():start());
-    document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='r')(ticking?pause():start());if(e.key==='0')reset();});
-    if(startTs){ticking=true;setStatus('status-studying','Studying',getComputedStyle(document.documentElement).getPropertyValue('--good'));}
-    else if(elapsed){setStatus('status-paused','Paused',getComputedStyle(document.documentElement).getPropertyValue('--bad'));}
-    else{setStatus('status-ready','Ready to study!','');}
+    /* ---------- Timer (green studying / red paused) ---------- */
+    const readyBtn = document.getElementById('readyBtn');
+    const readyText = document.getElementById('readyText');
+    const timerEl = document.getElementById('timer');
+    const badge = document.getElementById('badge');
+    let startTs = +localStorage.getItem('timer_start') || 0;
+    let elapsed = +localStorage.getItem('timer_elapsed') || 0;
+    let ticking = false, rafId=0;
+    function fmt(s){ const h=String(Math.floor(s/3600)).padStart(2,'0'), m=String(Math.floor(s%3600/60)).padStart(2,'0'), sec=String(Math.floor(s%60)).padStart(2,'0'); return `${h}:${m}:${sec}`; }
+    function paint(){ const now=Date.now(); const secs = elapsed + (ticking ? (now - startTs)/1000 : 0); timerEl.textContent = fmt(secs); rafId = requestAnimationFrame(paint); }
+    function setStatus(cls, text, color){
+      readyText.className = cls; readyText.textContent = text;
+      const c = color || getComputedStyle(document.documentElement).getPropertyValue('--accent');
+      badge.style.background = c; badge.style.boxShadow = `0 0 8px ${c}`;
+    }
+    function start(){ if(ticking) return; ticking=true; startTs = Date.now(); localStorage.setItem('timer_start', startTs); setStatus('status-studying','Studying', getComputedStyle(document.documentElement).getPropertyValue('--good')); }
+    function pause(){ if(!ticking) return; ticking=false; elapsed += (Date.now()-startTs)/1000; localStorage.setItem('timer_elapsed', elapsed); localStorage.removeItem('timer_start'); setStatus('status-paused','Paused', getComputedStyle(document.documentElement).getPropertyValue('--bad')); }
+    function reset(){ ticking=false; elapsed=0; localStorage.removeItem('timer_start'); localStorage.setItem('timer_elapsed',0); setStatus('status-ready','Ready to study!', ''); }
+    readyBtn.addEventListener('click', ()=> ticking ? pause() : start());
+    document.addEventListener('keydown', e=>{ if(e.key.toLowerCase()==='r')(ticking?pause():start()); if(e.key==='0') reset(); });
+    if (startTs) ticking=true, setStatus('status-studying','Studying', getComputedStyle(document.documentElement).getPropertyValue('--good'));
+    else if (elapsed) setStatus('status-paused','Paused', getComputedStyle(document.documentElement).getPropertyValue('--bad'));
+    else setStatus('status-ready','Ready to study!','');
     paint();
 
-    // ---------- Notes ----------
-    const notes=document.getElementById('notes');
-    const savedInfo=document.getElementById('savedInfo');
-    notes.value=localStorage.getItem('study_notes')||'';
-    let saveTO;notes.addEventListener('input',()=>{clearTimeout(saveTO);saveTO=setTimeout(()=>{localStorage.setItem('study_notes',notes.value);savedInfo.textContent='Saved '+new Date().toLocaleTimeString();},300);});
+    /* ---------- Tabbed Notes (add / delete / rename) ---------- */
+    const tabsWrap = document.getElementById('tabs');
+    const notes = document.getElementById('notes');
+    const savedInfo = document.getElementById('savedInfo');
+
+    function loadTabs(){
+      let t = JSON.parse(localStorage.getItem('note_tabs')||'[]');
+      if(!t.length) t = ['General','Page 1','Page 2','Page 3'];
+      return t;
+    }
+    function saveTabs(t){ localStorage.setItem('note_tabs', JSON.stringify(t)); }
+    function keyFor(name){ return 'note_'+name; }
+
+    let tabs = loadTabs();
+    let active = localStorage.getItem('note_active') || tabs[0];
+
+    function renderTabs(){
+      tabsWrap.innerHTML='';
+      tabs.forEach(name=>{
+        const el=document.createElement('div');
+        el.className='tab'+(name===active?' active':'');
+        el.title='Double-click to rename';
+        el.innerHTML = `<span class="t">${name}</span><button class="x" title="Delete">×</button>`;
+        el.querySelector('.t').ondblclick = ()=>{
+          const nn=prompt('Rename tab', name);
+          if(!nn || nn===name) return;
+          const idx=tabs.indexOf(name); tabs[idx]=nn;
+          // move content key
+          const oldKey=keyFor(name), newKey=keyFor(nn);
+          const val=localStorage.getItem(oldKey); if(val!==null){ localStorage.setItem(newKey,val); localStorage.removeItem(oldKey); }
+          if(active===name) active=nn;
+          saveTabs(tabs); localStorage.setItem('note_active',active);
+          renderTabs(); loadNote();
+        };
+        el.querySelector('.x').onclick = (ev)=>{
+          ev.stopPropagation();
+          if(!confirm(`Delete tab "${name}"?`)) return;
+          const idx=tabs.indexOf(name); tabs.splice(idx,1);
+          localStorage.removeItem(keyFor(name));
+          if(active===name) active = tabs[0] || 'General';
+          if(!tabs.length){ tabs=['General']; saveTabs(tabs); }
+          saveTabs(tabs); localStorage.setItem('note_active',active);
+          renderTabs(); loadNote();
+        };
+        el.onclick=()=>{ active=name; localStorage.setItem('note_active',active); renderTabs(); loadNote(); };
+        tabsWrap.appendChild(el);
+      });
+      const add=document.createElement('button');
+      add.className='addtab'; add.textContent='+ Add tab';
+      add.onclick=()=>{
+        const nn=prompt('New tab name');
+        if(!nn) return;
+        tabs.push(nn); saveTabs(tabs);
+        active=nn; localStorage.setItem('note_active',active);
+        renderTabs(); loadNote();
+      };
+      tabsWrap.appendChild(add);
+    }
+
+    function loadNote(){ notes.value = localStorage.getItem(keyFor(active)) || ''; savedInfo.textContent = 'Loaded '+active; }
+    let saveTO;
+    notes.addEventListener('input', ()=>{
+      clearTimeout(saveTO);
+      saveTO = setTimeout(()=>{
+        localStorage.setItem(keyFor(active), notes.value);
+        savedInfo.textContent='Saved '+new Date().toLocaleTimeString();
+      }, 300);
+    });
+
+    renderTabs(); loadNote();
   </script>
 </body>
 </html>
