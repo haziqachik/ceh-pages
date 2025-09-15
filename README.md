@@ -1,53 +1,35 @@
-﻿# CEH Pages — Personal Study Archive
+﻿# CEH Practice Pages
 
-**Live site:** https://haziqachik.github.io/ceh-pages/  
-**Purpose:** Personal, educational practice and hosting exercise.
+This repository hosts my saved **CEH practice pages** for personal study.  
+I organized the raw HTML into a working GitHub Pages site with:
+- Clean structure (pages/, esources/, pdfs/)
+- A study **timer**, **bookmark (last page)**, and **local notes** on the index
+- Minimal UI for quick navigation
 
-> **Important**  
-> These pages were saved for **personal study** (CEH prep). I host them to practice **Git, GitHub Pages, and web basics**. They’re **not for redistribution, resale, or commercial use**. If you are a rights holder and want content removed, please open an issue.
+⚠️ **Educational Use Only**  
+All materials are for **personal, non-commercial learning**.  
+This project is to practice:
+- Git/GitHub workflows
+- Static site hosting (GitHub Pages)
+- Frontend skills (HTML/CSS/JS)
 
----
+## Skills Practiced
+- Git & GitHub (commits, branching, repo organization)
+- GitHub Pages (static hosting)
+- HTML/CSS (custom index + UI)
+- JavaScript (timer, localStorage notes/bookmark)
+- Project structuring (assets & PDFs)
 
-## What I Practiced / Learned
-- **Git & GitHub:** cloning, staging/committing/pushing, handling long filenames, rolling back to specific commits.
-- **GitHub Pages:** publishing static HTML/CSS, fixing asset paths, using .nojekyll.
-- **Web Fundamentals:** HTML structure, minimal CSS, favicon/robots basics, linking multi-page static resources.
-- **Repo Hygiene:** clear README, license, and housekeeping; keeping long filenames + _files folders intact so assets load properly.
-- **Troubleshooting:** 404s, broken links, rename issues in PowerShell, and commit history management.
-- **Context (SG):** working within free GitHub (public repo), focusing on learning/portfolio value.
+## How to Use
+1. Open: https://haziqachik.github.io/ceh-pages/
+2. Click **1–7** to view pages.
+3. Use **Ready to study!** to start the timer; add notes below (saved locally).
+4. Set **Last page** to remember where you stopped.
 
----
-
-## Project Timeline (high level)
-1. **Initial upload** of CEH practice pages (long filenames + _files folders).
-2. **Experiments** with renaming/shortening → assets broke → learned why originals must stay.
-3. **Index page** for quick navigation.
-4. **Design pass** for a clean, minimalist landing page.
-5. **Documentation**: clarified educational-only use; improved README and repo settings.
-
----
-
-## Repo Structure (kept simple so assets work)
-- index.html — minimalist hub linking to the long-named pages.
-- *.htm + matching *_files/ — original pages & resource folders (kept as-is so JS/CSS/images load correctly).
-- .nojekyll — ensures GitHub Pages serves files untouched.
-
-> I intentionally keep the **original long filenames** and their matching _files folders. That’s what makes all scripts/styles/images load correctly on GitHub Pages.
+## Future Plans
+- Theme switcher (light/dark + accent)
+- Better mobile layout
+- Optional search across pages
 
 ---
-
-## How to View Locally
-- **Fastest:** Double-click index.html and navigate.
-- **Alternative:** Serve locally (prevents some browser restrictions):
-  - VS Code **Live Server** extension, or
-  - Python: python -m http.server then open http://localhost:8000/
-
----
-
-## Legal & Ethical
-- For **personal education** only.  
-- No resale or redistribution.  
-- Credits to the original content owners.  
-- I will act on legitimate takedown requests.
-
----
+📌 Part of my IT learning portfolio: https://github.com/haziqachik
