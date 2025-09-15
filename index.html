@@ -5,86 +5,68 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CEH Practice Pages</title>
 <style>
-/* ===== THEME TOKENS (each theme distinct) ===== */
 :root{
-  --bg:#0e1116; --fg:#e9edf3; --muted:#9aa6b2; --card:#151a22; --line:#232b36;
-  --accent:#69c2ae; --ring:rgba(105,194,174,.25);
+  --bg:#0f1115; --fg:#e9edf3; --muted:#a2acba; --card:#171c24; --line:#262d38;
+  --accent:#6fc2b0; --ring:rgba(111,194,176,.25);
 }
-html[data-theme="teal"]{
-  --bg:#0e1514; --fg:#e6fbf6; --muted:#99b5b0; --card:#12201d; --line:#21302c;
-  --accent:#5ec7b1; --ring:rgba(94,199,177,.28);
-}
-html[data-theme="blue"]{
-  --bg:#0d121b; --fg:#eaf1ff; --muted:#9db0cc; --card:#121a26; --line:#1f2a3a;
-  --accent:#6aa7ff; --ring:rgba(106,167,255,.28);
-}
-html[data-theme="lavender"]{
-  --bg:#13101a; --fg:#f3edff; --muted:#b7a8d6; --card:#191428; --line:#2a2242;
-  --accent:#b692f6; --ring:rgba(182,146,246,.30);
-}
-html[data-theme="amber"]{
-  --bg:#15110a; --fg:#fff6e8; --muted:#c9b596; --card:#1e160a; --line:#2a1e0b;
-  --accent:#f2b972; --ring:rgba(242,185,114,.32);
-}
-html[data-theme="light"]{
-  color-scheme: light;
-  --bg:#f8faff; --fg:#0f1217; --muted:#5f6b79; --card:#ffffff; --line:#e6eaf1;
+html[data-theme="blue"]{ --accent:#6aa7ff; --ring:rgba(106,167,255,.25);}
+html[data-theme="lavender"]{ --accent:#b692f6; --ring:rgba(182,146,246,.25);}
+html[data-theme="amber"]{ --accent:#f2b972; --ring:rgba(242,185,114,.25);}
+html[data-theme="light"]{ color-scheme:light;
+  --bg:#f8faff; --fg:#0e1115; --muted:#5f6b79; --card:#ffffff; --line:#e6eaf1;
   --accent:#2d8cff; --ring:rgba(45,140,255,.20);
 }
-@media (prefers-color-scheme: light){
-  :root{ --bg:#f6f8fc; --fg:#0f1217; --muted:#5f6b79; --card:#ffffff; --line:#e6eaf1;
-         --accent:#2d8cff; --ring:rgba(45,140,255,.20); }
-}
-
-/* ===== BASE LAYOUT ===== */
 *{box-sizing:border-box}
 body{margin:0;font:16px/1.55 system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
-.container{max-width:980px;padding:28px 20px;margin:0 auto}
-header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
-h1{font-size:clamp(22px,3.2vw,30px);margin:0}
-.desc{color:var(--muted);font-size:14.5px}
-.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-select, input[type="search"]{
-  padding:10px 12px;border-radius:12px;border:1px solid var(--line);
-  background:var(--card);color:var(--fg);outline:none;min-width:210px;
+.container{max-width:960px;padding:28px 20px;margin:0 auto}
+header{display:flex;flex-direction:column;gap:10px}
+h1{margin:0;font-size:26px}
+.desc{color:var(--muted);font-size:14px}
+
+/* Controls */
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+select,input[type="search"],button{
+  padding:8px 12px;border-radius:10px;border:1px solid var(--line);
+  background:var(--card);color:var(--fg);outline:none;font-size:14px;
 }
+button{cursor:pointer}
+
+/* Timer */
+.timer{font-weight:600;font-size:18px;margin-top:8px}
+
+/* Grid */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:18px}
-
-/* ===== CARD ===== */
 .card{
-  display:block;padding:18px 16px;border-radius:16px;background:var(--card);border:1px solid var(--line);
-  text-decoration:none;color:var(--fg);position:relative;box-shadow:0 6px 18px rgba(0,0,0,.18);
-  transition:transform .12s ease, box-shadow .18s ease, border-color .12s ease, outline-color .12s ease;
-  outline:2px solid transparent;
+  display:block;padding:18px;border-radius:16px;background:var(--card);border:1px solid var(--line);
+  text-decoration:none;color:var(--fg);position:relative;transition:.15s;
 }
-.card:hover{transform:translateY(-2px);box-shadow:0 10px 26px var(--ring);border-color:var(--accent)}
-.card.is-last{outline-color:var(--accent)}
-.badge{
-  position:absolute;top:10px;right:12px;font-size:12px;color:var(--muted);
-  padding:2px 8px;border:1px solid var(--line);border-radius:999px;background:transparent;
-}
-.num{font-weight:800;font-size:28px;letter-spacing:.2px}
+.card:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--ring);border-color:var(--accent)}
+.num{font-weight:700;font-size:26px}
 .sub{color:var(--muted);font-size:13.5px;margin-top:4px}
-.chev{position:absolute;bottom:12px;right:14px;font-size:20px;opacity:.85;transition:transform .12s ease}
-.card:hover .chev{transform:translateX(3px)}
-.disabled{opacity:.55;pointer-events:none}
+.badge{
+  position:absolute;top:10px;right:12px;padding:4px 10px;font-size:12px;
+  border-radius:999px;background:var(--accent);color:#fff;font-weight:600;
+}
+.card.is-last{outline:2px solid var(--accent)}
 
-/* ===== FOOTER ===== */
-.footer{margin-top:28px;color:var(--muted);font-size:12.5px}
-hr.sep{border:none;border-top:1px solid var(--line);margin:14px 0}
-.small{font-size:12.5px;color:var(--muted)}
+/* Notes */
+.notes{margin-top:30px}
+.notes textarea{
+  width:100%;min-height:120px;padding:12px;border-radius:10px;
+  border:1px solid var(--line);background:var(--card);color:var(--fg);
+  font:15px/1.4 system-ui,Segoe UI,Roboto,Arial;resize:vertical;
+}
+.footer{margin-top:20px;color:var(--muted);font-size:12.5px}
 </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <div>
-        <h1>CEH Practice Set</h1>
-        <div class="desc">Seven saved pages for personal study. Pick a page below.</div>
-      </div>
+      <h1>CEH Practice Set</h1>
+      <div class="desc">Seven saved pages for personal study. Track your progress below.</div>
       <div class="controls">
-        <input id="q" type="search" placeholder="Filter pages…" aria-label="Filter pages" />
-        <select id="last" aria-label="Last page">
+        <input id="q" type="search" placeholder="Filter…" />
+        <select id="last">
           <option value="">Bookmark: none</option>
           <option value="1">Last page: 1</option>
           <option value="2">Last page: 2</option>
@@ -94,127 +76,91 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:14px 0}
           <option value="6">Last page: 6</option>
           <option value="7">Last page: 7</option>
         </select>
-        <select id="theme" aria-label="Theme">
-          <option value="system">Theme: System auto</option>
-          <option value="teal">Theme: Teal</option>
-          <option value="blue">Theme: Blue</option>
-          <option value="lavender">Theme: Lavender</option>
-          <option value="amber">Theme: Amber</option>
-          <option value="light">Theme: Light</option>
+        <select id="theme">
+          <option value="system">Theme: System</option>
+          <option value="blue">Blue</option>
+          <option value="lavender">Lavender</option>
+          <option value="amber">Amber</option>
+          <option value="light">Light</option>
         </select>
+      </div>
+      <div class="controls">
+        <div class="timer" id="timer">00:00</div>
+        <button id="startBtn">Start</button>
+        <button id="stopBtn">Stop</button>
+        <button id="resetBtn">Reset</button>
       </div>
     </header>
 
-    <div id="grid" class="grid" aria-live="polite"></div>
+    <div id="grid" class="grid"></div>
 
-    <hr class="sep" />
+    <div class="notes">
+      <h3>Study Notes</h3>
+      <textarea id="notesBox" placeholder="Write your thoughts, reminders, or key points here..."></textarea>
+    </div>
+
     <div class="footer">
-      Educational use only • Content mirrored for offline study • © <span id="year"></span>
-      <div class="small">Tip: set your “Last page” to remember where you stopped.</div>
+      Educational use only • © <span id="year"></span>
     </div>
   </div>
 
 <script>
-/* ---------- Link detection ---------- */
-const longName = i => `312-50v13 Exam - Free Actual Q&As, Page ${i} _ ExamTopics.htm`;
-const candidates = i => [
-  encodeURIComponent(longName(i)),
-  `${i}.html`,
-  `pages/${i}.html`
-];
-async function pickUrl(list){
-  for(const url of list){
-    try{
-      const r = await fetch(url,{method:'HEAD',cache:'no-store'});
-      if(r.ok) return url;
-    }catch(e){}
-  }
-  return null;
-}
+/* Link candidates */
+const longName=i=>`312-50v13 Exam - Free Actual Q&As, Page ${i} _ ExamTopics.htm`;
+const candidates=i=>[encodeURIComponent(longName(i)),`${i}.html`,`pages/${i}.html`];
+async function pickUrl(list){for(const url of list){try{const r=await fetch(url,{method:'HEAD'});if(r.ok)return url}catch(e){}}return null;}
 
-/* ---------- Page labels (question ranges) ---------- */
-function rangeFor(i){
-  if(i<7){ const start = (i-1)*50+1; const end = i*50; return `${start}–${end}`; }
-  return '301–302';
-}
+/* Question ranges */
+function rangeFor(i){if(i<7){const s=(i-1)*50+1,e=i*50;return `${s}–${e}`;}return '301–302';}
 
-/* ---------- State (theme + bookmark) ---------- */
-const themeSel = document.getElementById('theme');
-const lastSel  = document.getElementById('last');
-function applyTheme(val){
-  const html=document.documentElement;
-  if(val==='system'){ html.removeAttribute('data-theme'); localStorage.setItem('ceh:theme','system'); return; }
-  html.setAttribute('data-theme',val);
-  localStorage.setItem('ceh:theme',val);
-}
-(function initTheme(){
-  const saved = localStorage.getItem('ceh:theme') || 'system';
-  themeSel.value = saved;
-  applyTheme(saved);
-})();
-themeSel.addEventListener('change', e=>applyTheme(e.target.value));
-
-function setLast(val){
-  if(val) localStorage.setItem('ceh:last', String(val));
-  else localStorage.removeItem('ceh:last');
-  renderBadges();
-}
-(function initLast(){
-  const saved = localStorage.getItem('ceh:last') || '';
-  lastSel.value = saved;
-})();
-lastSel.addEventListener('change', e=>setLast(e.target.value));
-
-/* ---------- Build cards ---------- */
-const items = [];
+/* Build grid */
 async function build(){
-  const grid=document.getElementById('grid');
+  const g=document.getElementById('grid');const last=localStorage.getItem('ceh:last')||'';
   for(let i=1;i<=7;i++){
     const url=await pickUrl(candidates(i));
-    items.push({i,url});
-    const a=document.createElement('a');
-    a.className='card'+(url?'':' disabled');
-    a.href=url||'#';
-    a.dataset.index=i;
-    a.dataset.label=`${i} ${rangeFor(i)} page ${i}`;
-    a.innerHTML=`
-      <span class="badge" data-badge="${i}">${url ? 'Ready' : 'Missing'}</span>
-      <div class="num">${i}</div>
-      <div class="sub">Questions ${rangeFor(i)}</div>
-      <div class="chev">›</div>
-    `;
-    grid.appendChild(a);
+    const a=document.createElement('a');a.className='card';if(!url)a.classList.add('disabled');
+    if(last==i)a.classList.add('is-last');
+    a.href=url||'#';a.dataset.label=`${i} ${rangeFor(i)}`;
+    a.innerHTML=`<span class="badge">${url?'Ready to study!':'Missing'}</span>
+                 <div class="num">${i}</div><div class="sub">Questions ${rangeFor(i)}</div>`;
+    g.appendChild(a);
   }
-  renderBadges();
 }
 
-/* ---------- Badges / highlight based on bookmark ---------- */
-function renderBadges(){
-  const last = localStorage.getItem('ceh:last');
-  document.querySelectorAll('.card').forEach(c=>{
-    c.classList.remove('is-last');
-    const i = String(c.dataset.index);
-    const badge = c.querySelector('[data-badge]');
-    if(last && i===last){
-      badge.textContent = 'Last here';
-      c.classList.add('is-last');
-    }else{
-      const isMissing = c.classList.contains('disabled');
-      badge.textContent = isMissing ? 'Missing' : 'Ready';
-    }
-  });
-}
+/* Bookmark */
+const lastSel=document.getElementById('last');
+lastSel.value=localStorage.getItem('ceh:last')||'';
+lastSel.onchange=e=>{if(e.target.value)localStorage.setItem('ceh:last',e.target.value);
+ else localStorage.removeItem('ceh:last');location.reload();};
 
-/* ---------- Search ---------- */
-document.getElementById('q').addEventListener('input',e=>{
-  const t=e.target.value.toLowerCase().trim();
-  document.querySelectorAll('.card').forEach(c=>{
-    const match = c.dataset.label.includes(t);
-    c.style.display = t ? (match ? '' : 'none') : '';
-  });
-});
+/* Theme */
+const themeSel=document.getElementById('theme');
+function applyTheme(val){const html=document.documentElement;
+ if(val==='system'){html.removeAttribute('data-theme');localStorage.setItem('ceh:theme','system');return;}
+ html.setAttribute('data-theme',val);localStorage.setItem('ceh:theme',val);}
+(function(){const s=localStorage.getItem('ceh:theme')||'system';themeSel.value=s;applyTheme(s);})();
+themeSel.onchange=e=>applyTheme(e.target.value);
 
-/* ---------- Misc ---------- */
+/* Timer */
+let t=0,interval=null;
+function update(){document.getElementById('timer').textContent=
+ String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');}
+document.getElementById('startBtn').onclick=()=>{if(interval)return;interval=setInterval(()=>{t++;update();},1000);};
+document.getElementById('stopBtn').onclick=()=>{clearInterval(interval);interval=null;};
+document.getElementById('resetBtn').onclick=()=>{t=0;update();};
+update();
+
+/* Notes (localStorage) */
+const box=document.getElementById('notesBox');
+box.value=localStorage.getItem('ceh:notes')||'';
+box.oninput=()=>localStorage.setItem('ceh:notes',box.value);
+
+/* Search */
+document.getElementById('q').oninput=e=>{
+  const t=e.target.value.toLowerCase();
+  document.querySelectorAll('.card').forEach(c=>{c.style.display=c.dataset.label.includes(t)?'':'none';});
+};
+
 document.getElementById('year').textContent=new Date().getFullYear();
 build();
 </script>
