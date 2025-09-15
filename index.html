@@ -1,43 +1,51 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CEH Practice Pages</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
   <style>
-    :root { --bg:#f5f7fb; --card:#ffffff; --ink:#111; --sub:#555; --line:#e6e8ef; }
-    *{box-sizing:border-box} body{margin:0;font:16px system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-    .wrap{max-width:960px;margin:48px auto;padding:0 20px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px;box-shadow:0 8px 20px rgba(0,0,0,.06)}
-    h1{margin:0 0 4px;font-size:1.75rem}
-    p.lead{margin:0 0 20px;color:var(--sub)}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:10px}
-    a.part{display:block;padding:16px 14px;border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);background:#fafbff}
-    a.part:hover{transform:translateY(-2px);transition:.15s ease;box-shadow:0 6px 16px rgba(0,0,0,.07)}
-    footer{margin-top:14px;color:var(--sub);font-size:.9rem}
-    .note{margin-top:16px;padding:12px;border-radius:10px;background:#f0f3ff;border:1px solid #dbe3ff}
+    :root { --bg1:#e9f0ff; --bg2:#f9fafc; --card:#ffffff; --ink:#111; --muted:#666; --line:#e5e7eb; }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font:16px/1.5 system-ui, Segoe UI, Arial, sans-serif;
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      background: linear-gradient(135deg, var(--bg1), var(--bg2));
+      color:var(--ink);
+    }
+    .wrap{
+      width:clamp(320px, 92vw, 920px);
+      background:var(--card); border:1px solid var(--line); border-radius:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+      padding:28px 28px 18px;
+    }
+    h1{margin:0 0 18px;font-size:1.6rem}
+    p.note{margin:0 0 18px;color:var(--muted);font-size:.95rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
+    a.item{
+      display:block; text-decoration:none; color:var(--ink); background:#f6f8fc;
+      border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-weight:600;
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+    a.item:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.08); background:#eef3ff}
+    footer{margin-top:16px; padding-top:12px; border-top:1px dashed var(--line); color:var(--muted); font-size:.9rem}
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section class="card">
-      <h1>CEH Practice Pages</h1>
-      <p class="lead">Personal study archive (Parts 1–7). Assets preserved for correct offline-style rendering.</p>
-
-      <div class="grid">
-        <a class="part" href="312-50v13%20Exam%20-%20Free%20Actual%20Q%26As,%20Page%201%20_%20ExamTopics.htm">Part 1</a>
-        <a class="part" href="312-50v13%20Exam%20-%20Free%20Actual%20Q%26As,%20Page%202%20_%20ExamTopics.htm">Part 2</a>
-        <a class="part" href="312-50v13%20Exam%20-%20Free%20Actual%20Q%26As,%20Page%203%20_%20ExamTopics.htm">Part 3</a>
-        <a class="part" href="312-50v13%20Exam%20-%20Free%20Actual%20Q%26As,%20Page%204%20_%20ExamTopics.htm">Part 4</a>
-        <a class="part" href="312-50v13%20Exam%20-%20Free%20Actual%20Q%26As,%20Page%205%20_%20ExamTopics.htm">Part 5</a>
-        <a class="part" href="312-50v13%20Exam%20-%20Free%20Actual%20Q%26As,%20Page%206%20_%20ExamTopics.htm">Part 6</a>
-        <a class="part" href="312-50v13%20Exam%20-%20Free%20Actual%20Q%26As,%20Page%207%20_%20ExamTopics.htm">Part 7</a>
-      </div>
-
-      <div class="note">⚠️ Educational use only · Not for redistribution or resale.</div>
-      <footer>© 2025 Haziq · Hosted on GitHub Pages</footer>
+    <h1>CEH Practice Pages</h1>
+    <p class="note">Personal educational archive. Original study content belongs to its provider.</p>
+    <section class="grid">
+      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 1 _ ExamTopics.htm">Part 1</a>
+      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 2 _ ExamTopics.htm">Part 2</a>
+      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 3 _ ExamTopics.htm">Part 3</a>
+      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 4 _ ExamTopics.htm">Part 4</a>
+      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 5 _ ExamTopics.htm">Part 5</a>
+      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 6 _ ExamTopics.htm">Part 6</a>
+      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 7 _ ExamTopics.htm">Part 7</a>
     </section>
+    <footer>⚠️ Educational use only · Not for redistribution</footer>
   </main>
 </body>
 </html>
