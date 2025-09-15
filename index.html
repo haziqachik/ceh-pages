@@ -5,24 +5,26 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>CEH Practice Pages</title>
 
-  <!-- Popular fonts; safe fallback to system if blocked -->
+  <!-- Popular fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --font:System-UI,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      /* Teal (default) */
       --bg:#0b0d10; --bg2:#10141b; --panel:#0e1116;
-      --text:#eaf1fb; --muted:#8a97a7; --border:#1f2530; --accent:#4fd1c5;
+      --text:#eaf1fb; --muted:#8a97a7; --border:#1f2530;
+      --accent:#4fd1c5; --ring:#26b3a6;
       --card1:#121821; --card2:#0f151c;
-      --good:#4ade80; --bad:#f87171; --ring:#26b3a6;
+      --good:#4ade80; --bad:#f87171;
     }
-    body[data-theme="purple"]{ --accent:#a78bfa; --ring:#8b5cf6; }
-    body[data-theme="blue"]  { --accent:#60a5fa; --ring:#3b82f6; }
-    body[data-theme="rose"]  { --accent:#fb7185; --ring:#f43f5e; }
-    body[data-theme="amber"] { --accent:#fbbf24; --ring:#f59e0b; }
-    body[data-theme="emerald"]{--accent:#34d399; --ring:#10b981; }
-    body[data-theme="slate"] { --accent:#94a3b8; --ring:#64748b; }
+    /* Themes */
+    body[data-theme="teal"]   { --accent:#4fd1c5; --ring:#26b3a6; }
+    body[data-theme="purple"] { --accent:#a78bfa; --ring:#8b5cf6; }
+    body[data-theme="blue"]   { --accent:#60a5fa; --ring:#3b82f6; }
+    body[data-theme="rose"]   { --accent:#fb7185; --ring:#f43f5e; }
+    body[data-theme="amber"]  { --accent:#fbbf24; --ring:#f59e0b; }
+    body[data-theme="emerald"]{ --accent:#34d399; --ring:#10b981; }
+    body[data-theme="slate"]  { --accent:#94a3b8; --ring:#64748b; }
 
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -33,9 +35,7 @@
     }
     .container{width:min(1000px,100%);}
 
-    .header{
-      display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:16px;
-    }
+    .header{display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:16px;}
     .title{font-size:20px; font-weight:600; letter-spacing:.3px}
     .controls{display:flex; gap:10px; flex-wrap:wrap}
     select,button,input{
@@ -65,10 +65,7 @@
     .box{ background:linear-gradient(180deg,#11161e,#0f141b); border:1px solid var(--border); border-radius:14px; padding:14px; }
     .box h4{margin:0 0 8px 0; font-weight:600}
 
-    .ready{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:8px 10px; border-radius:10px; background:#0d131b; border:1px dashed #2a3342; user-select:none;
-    }
+    .ready{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:10px; background:#0d131b; border:1px dashed #2a3342; user-select:none;}
     .badge{display:inline-block; width:8px; height:8px; border-radius:999px; background:var(--accent); box-shadow:0 0 8px var(--accent)}
     .timer{font-variant-numeric:tabular-nums; font-size:18px; margin-left:8px}
     .status-ready{ color:var(--accent); }
@@ -83,7 +80,7 @@
     .small{font-size:12px; color:var(--muted)}
     hr{border:0; border-top:1px solid var(--border); margin:10px 0}
 
-    /* cursor options */
+    /* cursor */
     .cursor-dot{position:fixed; pointer-events:none; width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:.75; transform:translate(-50%,-50%); will-change:transform,opacity; animation:fade .6s ease-out forwards}
     .cursor-comet{width:10px; height:10px; filter:blur(0.5px)}
     .cursor-off .cursor-dot{display:none}
@@ -97,10 +94,10 @@
       <div class="controls">
         <label class="small">Font:
           <select id="fontSel">
-            <option value="System-UI,Segoe UI,Roboto,Inter,Arial,sans-serif">System</option>
-            <option value="'Inter',System-UI,Segoe UI,Arial,sans-serif">Inter</option>
-            <option value="'Roboto',System-UI,Segoe UI,Arial,sans-serif">Roboto</option>
-            <option value="'Poppins',System-UI,Segoe UI,Arial,sans-serif">Poppins</option>
+            <option value="system">System</option>
+            <option value="inter">Inter</option>
+            <option value="roboto">Roboto</option>
+            <option value="poppins">Poppins</option>
           </select>
         </label>
         <label class="small">Theme:
@@ -160,162 +157,109 @@
     // ---------- Config ----------
     const totalPages = 7;
     const questionRanges = {
-      1: "Q1–50", 2: "Q51–100", 3: "Q101–150", 4: "Q151–200",
-      5: "Q201–250", 6: "Q251–300", 7: "Q301–302"
+      1:"Q1–50",2:"Q51–100",3:"Q101–150",4:"Q151–200",
+      5:"Q201–250",6:"Q251–300",7:"Q301–302"
     };
 
-    // ---------- Build grid ----------
+    // ---------- Grid ----------
     const grid = document.getElementById('grid');
-    for (let i=1;i<=totalPages;i++){
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.dataset.page = i;
-      card.innerHTML = `
-        <div>
-          <h3>Page ${i}</h3>
-          <div class="range">${questionRanges[i]}</div>
-        </div>
-      `;
+    for(let i=1;i<=totalPages;i++){
+      const card=document.createElement('div');
+      card.className='card'; card.dataset.page=i;
+      card.innerHTML=`<div><h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div></div>`;
       card.addEventListener('click',()=>openPage(i));
       grid.appendChild(card);
     }
 
-    // Bookmark highlight
-    const bm = document.getElementById('bm');
+    // ---------- Bookmark ----------
+    const bm=document.getElementById('bm');
     function updateBookmarkHighlight(){
       document.querySelectorAll('.card').forEach(c=>c.classList.remove('bookmarked'));
-      const n = +bm.value;
-      if (n>=1 && n<=totalPages){
-        const el = document.querySelector('.card[data-page="'+n+'"]');
-        if (el) el.classList.add('bookmarked');
+      const n=+bm.value;
+      if(n>=1 && n<=totalPages){
+        const el=document.querySelector('.card[data-page="'+n+'"]');
+        if(el) el.classList.add('bookmarked');
       }
     }
-    bm.value = localStorage.getItem('bookmark') || '';
-    bm.addEventListener('change', ()=>{ localStorage.setItem('bookmark', bm.value); updateBookmarkHighlight(); });
+    bm.value=localStorage.getItem('bookmark')||'';
+    bm.addEventListener('change',()=>{localStorage.setItem('bookmark',bm.value);updateBookmarkHighlight();});
     updateBookmarkHighlight();
 
-    // ---------- Detect long/short page filename and open ----------
+    // ---------- Open Page ----------
     async function openPage(n){
-      const long = encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
-      const short = `pages/${n}.html`;
-      const okLong = await fetch(long, {method:'HEAD'}).then(r=>r.ok).catch(()=>false);
-      if (okLong) { location.href = long; return; }
-      const okShort = await fetch(short, {method:'HEAD'}).then(r=>r.ok).catch(()=>false);
-      if (okShort) { location.href = short; return; }
+      const long=encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
+      const short=`pages/${n}.html`;
+      const okLong=await fetch(long,{method:'HEAD'}).then(r=>r.ok).catch(()=>false);
+      if(okLong){location.href=long;return;}
+      const okShort=await fetch(short,{method:'HEAD'}).then(r=>r.ok).catch(()=>false);
+      if(okShort){location.href=short;return;}
       alert('Page not found locally.');
     }
 
-    // ---------- Font, Theme, Cursor ----------
-    const root = document.documentElement;
-    const fontSel = document.getElementById('fontSel');
-    const themeSel = document.getElementById('themeSel');
-    const cursorSel = document.getElementById('cursorSel');
+    // ---------- Font/Theme/Cursor ----------
+    const root=document.documentElement;
+    const fontSel=document.getElementById('fontSel');
+    const themeSel=document.getElementById('themeSel');
+    const cursorSel=document.getElementById('cursorSel');
 
     // Font
-    fontSel.value = localStorage.getItem('fontSel') || fontSel.value;
-    root.style.setProperty('--font', fontSel.value);
-    fontSel.onchange = ()=>{ root.style.setProperty('--font', fontSel.value); localStorage.setItem('fontSel', fontSel.value); };
+    const fontMap={
+      system:"System-UI,Segoe UI,Roboto,Inter,Arial,sans-serif",
+      inter:"'Inter',System-UI,Segoe UI,Arial,sans-serif",
+      roboto:"'Roboto',System-UI,Segoe UI,Arial,sans-serif",
+      poppins:"'Poppins',System-UI,Segoe UI,Arial,sans-serif"
+    };
+    const savedFont=localStorage.getItem('fontSel')||'system';
+    fontSel.value=savedFont; root.style.setProperty('--font',fontMap[savedFont]);
+    fontSel.onchange=()=>{root.style.setProperty('--font',fontMap[fontSel.value]);localStorage.setItem('fontSel',fontSel.value);};
 
     // Theme
-    const savedTheme = localStorage.getItem('themeSel') || 'teal';
-    document.body.dataset.theme = savedTheme;
-    themeSel.value = savedTheme;
-    themeSel.onchange = ()=>{ document.body.dataset.theme = themeSel.value; localStorage.setItem('themeSel', themeSel.value); };
+    const savedTheme=localStorage.getItem('themeSel')||'teal';
+    document.body.dataset.theme=savedTheme; themeSel.value=savedTheme;
+    themeSel.onchange=()=>{document.body.dataset.theme=themeSel.value;localStorage.setItem('themeSel',themeSel.value);};
 
     // Cursor
-    function applyCursorState(){
-      document.body.classList.toggle('cursor-off', cursorSel.value==='off');
-    }
-    cursorSel.value = localStorage.getItem('cursorSel') || 'off';
-    applyCursorState();
-    cursorSel.onchange = ()=>{ localStorage.setItem('cursorSel', cursorSel.value); applyCursorState(); };
-
-    let lastDot = 0;
-    window.addEventListener('mousemove', e=>{
-      if (cursorSel.value==='off') return;
-      const now = performance.now();
-      if (now - lastDot < 16) return;
-      lastDot = now;
-      const dot = document.createElement('div');
-      dot.className = 'cursor-dot' + (cursorSel.value==='comet' ? ' cursor-comet' : '');
-      dot.style.left = e.clientX+'px';
-      dot.style.top  = e.clientY+'px';
+    function applyCursor(){document.body.classList.toggle('cursor-off',cursorSel.value==='off');}
+    cursorSel.value=localStorage.getItem('cursorSel')||'off';
+    applyCursor(); cursorSel.onchange=()=>{localStorage.setItem('cursorSel',cursorSel.value);applyCursor();};
+    let lastDot=0;
+    window.addEventListener('mousemove',e=>{
+      if(cursorSel.value==='off')return;
+      const now=performance.now(); if(now-lastDot<16)return; lastDot=now;
+      const dot=document.createElement('div');
+      dot.className='cursor-dot'+(cursorSel.value==='comet'?' cursor-comet':'');
+      dot.style.left=e.clientX+'px'; dot.style.top=e.clientY+'px';
       document.body.appendChild(dot);
-      setTimeout(()=>dot.remove(), cursorSel.value==='comet' ? 800 : 600);
+      setTimeout(()=>dot.remove(),cursorSel.value==='comet'?800:600);
     });
 
     // ---------- Timer ----------
-    const readyBtn = document.getElementById('readyBtn');
-    const readyText = document.getElementById('readyText');
-    const timerEl = document.getElementById('timer');
-    const badge = document.getElementById('badge');
+    const readyBtn=document.getElementById('readyBtn');
+    const readyText=document.getElementById('readyText');
+    const timerEl=document.getElementById('timer');
+    const badge=document.getElementById('badge');
+    let startTs=+localStorage.getItem('timer_start')||0;
+    let elapsed=+localStorage.getItem('timer_elapsed')||0;
+    let ticking=false,rafId=0;
 
-    let startTs = +localStorage.getItem('timer_start') || 0;
-    let elapsed = +localStorage.getItem('timer_elapsed') || 0;
-    let ticking = false, rafId=0;
-
-    function fmt(s){
-      const h = String(Math.floor(s/3600)).padStart(2,'0');
-      const m = String(Math.floor(s%3600/60)).padStart(2,'0');
-      const sec = String(Math.floor(s%60)).padStart(2,'0');
-      return `${h}:${m}:${sec}`;
-    }
-    function paint(){
-      const now = Date.now();
-      const secs = elapsed + (ticking ? (now - startTs)/1000 : 0);
-      timerEl.textContent = fmt(secs);
-      rafId = requestAnimationFrame(paint);
-    }
-    function setStatus(cls, text, badgeColor){
-      readyText.className = cls;
-      readyText.textContent = text;
-      badge.style.background = badgeColor || getComputedStyle(document.documentElement).getPropertyValue('--accent');
-      badge.style.boxShadow = `0 0 8px ${badge.style.background}`;
-    }
-    function start(){
-      if (ticking) return;
-      ticking = true; startTs = Date.now();
-      localStorage.setItem('timer_start', startTs);
-      setStatus('status-studying', 'Studying', getComputedStyle(document.documentElement).getPropertyValue('--good'));
-    }
-    function pause(){
-      if (!ticking) return;
-      ticking = false;
-      elapsed += (Date.now() - startTs)/1000;
-      localStorage.setItem('timer_elapsed', elapsed);
-      localStorage.removeItem('timer_start');
-      setStatus('status-paused', 'Paused', getComputedStyle(document.documentElement).getPropertyValue('--bad'));
-    }
-    function reset(){
-      ticking = false; elapsed = 0;
-      localStorage.removeItem('timer_start');
-      localStorage.setItem('timer_elapsed', 0);
-      setStatus('status-ready', 'Ready to study!', '');
-    }
-    readyBtn.addEventListener('click', ()=> ticking ? pause() : start());
-    document.addEventListener('keydown', e=>{
-      if (e.key.toLowerCase()==='r') (ticking ? pause() : start());
-      if (e.key==='0') reset();
-    });
-
-    // Restore status on load
-    if (startTs) { ticking = true; setStatus('status-studying', 'Studying', getComputedStyle(document.documentElement).getPropertyValue('--good')); }
-    else if (elapsed) { setStatus('status-paused', 'Paused', getComputedStyle(document.documentElement).getPropertyValue('--bad')); }
-    else { setStatus('status-ready', 'Ready to study!', ''); }
+    function fmt(s){const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),sec=String(Math.floor(s%60)).padStart(2,'0');return`${h}:${m}:${sec}`;}
+    function paint(){const now=Date.now();const secs=elapsed+(ticking?(now-startTs)/1000:0);timerEl.textContent=fmt(secs);rafId=requestAnimationFrame(paint);}
+    function setStatus(cls,text,color){readyText.className=cls;readyText.textContent=text;badge.style.background=color||getComputedStyle(document.documentElement).getPropertyValue('--accent');badge.style.boxShadow=`0 0 8px ${badge.style.background}`;}
+    function start(){if(ticking)return;ticking=true;startTs=Date.now();localStorage.setItem('timer_start',startTs);setStatus('status-studying','Studying',getComputedStyle(document.documentElement).getPropertyValue('--good'));}
+    function pause(){if(!ticking)return;ticking=false;elapsed+=(Date.now()-startTs)/1000;localStorage.setItem('timer_elapsed',elapsed);localStorage.removeItem('timer_start');setStatus('status-paused','Paused',getComputedStyle(document.documentElement).getPropertyValue('--bad'));}
+    function reset(){ticking=false;elapsed=0;localStorage.removeItem('timer_start');localStorage.setItem('timer_elapsed',0);setStatus('status-ready','Ready to study!','');}
+    readyBtn.addEventListener('click',()=>ticking?pause():start());
+    document.addEventListener('keydown',e=>{if(e.key.toLowerCase()==='r')(ticking?pause():start());if(e.key==='0')reset();});
+    if(startTs){ticking=true;setStatus('status-studying','Studying',getComputedStyle(document.documentElement).getPropertyValue('--good'));}
+    else if(elapsed){setStatus('status-paused','Paused',getComputedStyle(document.documentElement).getPropertyValue('--bad'));}
+    else{setStatus('status-ready','Ready to study!','');}
     paint();
 
-    // ---------- Notes (auto-save) ----------
-    const notes = document.getElementById('notes');
-    const savedInfo = document.getElementById('savedInfo');
-    notes.value = localStorage.getItem('study_notes') || '';
-    let saveTO;
-    notes.addEventListener('input', ()=>{
-      clearTimeout(saveTO);
-      saveTO = setTimeout(()=>{
-        localStorage.setItem('study_notes', notes.value);
-        savedInfo.textContent = 'Saved ' + new Date().toLocaleTimeString();
-      }, 300);
-    });
+    // ---------- Notes ----------
+    const notes=document.getElementById('notes');
+    const savedInfo=document.getElementById('savedInfo');
+    notes.value=localStorage.getItem('study_notes')||'';
+    let saveTO;notes.addEventListener('input',()=>{clearTimeout(saveTO);saveTO=setTimeout(()=>{localStorage.setItem('study_notes',notes.value);savedInfo.textContent='Saved '+new Date().toLocaleTimeString();},300);});
   </script>
 </body>
 </html>
