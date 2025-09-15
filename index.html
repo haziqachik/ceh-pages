@@ -5,39 +5,40 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>CEH Practice Pages</title>
 <style>
-/* Softer, calmer palette */
+/* -------- THEME TOKENS -------- */
 :root{
-  --bg:#0f1115;        /* charcoal */
-  --fg:#e8eaee;        /* off-white */
-  --muted:#a7b0bc;     /* slate */
-  --card:#151922;      /* deep slate */
-  --line:#222a36;      /* hairline */
-  --accent:#6fc2b0;    /* muted teal */
-  --ring:rgba(111,194,176,.25);
+  --bg:#0f1115; --fg:#e8eaee; --muted:#a7b0bc; --card:#151922; --line:#222a36;
+  --accent:#6fc2b0; --ring:rgba(111,194,176,.25);
 }
 @media (prefers-color-scheme: light){
-  :root{
-    --bg:#f6f7fb;
-    --fg:#101317;
-    --muted:#5f6b79;
-    --card:#ffffff;
-    --line:#e6e8ee;
-    --accent:#3aa290;
-    --ring:rgba(58,162,144,.18);
-  }
+  :root{ --bg:#f6f7fb; --fg:#101317; --muted:#5f6b79; --card:#ffffff; --line:#e6e8ee;
+         --accent:#3aa290; --ring:rgba(58,162,144,.18); }
 }
+/* Alternate themes toggled via [data-theme] on <html> */
+html[data-theme="teal"]    { --accent:#6fc2b0; --ring:rgba(111,194,176,.25); }
+html[data-theme="blue"]    { --accent:#6aa7ff; --ring:rgba(106,167,255,.23); }
+html[data-theme="lavender"]{ --accent:#b692f6; --ring:rgba(182,146,246,.23); }
+html[data-theme="amber"]   { --accent:#f2b972; --ring:rgba(242,185,114,.24); }
+html[data-theme="light"]   { color-scheme:light;
+  --bg:#fafbff; --fg:#0b0f14; --muted:#596474; --card:#ffffff; --line:#e7eaf1;
+  --accent:#2d8cff; --ring:rgba(45,140,255,.18);
+}
+
+/* -------- BASE LAYOUT -------- */
 *{box-sizing:border-box}
-body{margin:0;font:16px/1.5 system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
+body{margin:0;font:16px/1.55 system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
 .container{max-width:980px;padding:28px 20px;margin:0 auto}
 header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
 h1{font-size:clamp(22px,3.2vw,30px);margin:0}
 .desc{color:var(--muted);font-size:14.5px}
-.controls{display:flex;gap:8px;align-items:center}
-input[type="search"]{
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+select, input[type="search"]{
   padding:10px 12px;border-radius:12px;border:1px solid var(--line);
   background:var(--card);color:var(--fg);outline:none;min-width:220px;
 }
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:18px}
+
+/* -------- CARD -------- */
 .card{
   display:block;padding:18px 16px;border-radius:16px;background:var(--card);border:1px solid var(--line);
   text-decoration:none;color:var(--fg);position:relative;box-shadow:0 6px 18px rgba(0,0,0,.18);
@@ -48,15 +49,14 @@ input[type="search"]{
   position:absolute;top:10px;right:12px;font-size:12px;color:var(--muted);
   padding:2px 8px;border:1px solid var(--line);border-radius:999px;background:transparent;
 }
-.card-title{font-weight:650;font-size:18px;margin:0 0 6px}
-.card-sub{color:var(--muted);font-size:13.5px;margin:0}
-.btn{
-  display:inline-block;margin-top:10px;padding:8px 10px;border-radius:10px;
-  border:1px solid var(--line);color:var(--fg);text-decoration:none;font-size:14px;
-}
-.card:hover .btn{border-color:var(--accent)}
-.footer{margin-top:28px;color:var(--muted);font-size:12.5px}
+.num{font-weight:700;font-size:26px;letter-spacing:.3px}
+.sub{color:var(--muted);font-size:13.5px;margin-top:4px}
+.chev{position:absolute;bottom:12px;right:14px;font-size:20px;opacity:.8;transition:transform .12s ease}
+.card:hover .chev{transform:translateX(3px)}
 .disabled{opacity:.55;pointer-events:none}
+
+/* -------- FOOTER -------- */
+.footer{margin-top:28px;color:var(--muted);font-size:12.5px}
 hr.sep{border:none;border-top:1px solid var(--line);margin:14px 0}
 </style>
 </head>
@@ -65,10 +65,18 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:14px 0}
     <header>
       <div>
         <h1>CEH Practice Set</h1>
-        <div class="desc">Seven saved pages for personal study. Pick a part below to open it.</div>
+        <div class="desc">Seven saved pages for personal study. Choose a page below.</div>
       </div>
       <div class="controls">
-        <input id="q" type="search" placeholder="Filter parts…" aria-label="Filter parts" />
+        <input id="q" type="search" placeholder="Filter pages…" aria-label="Filter pages" />
+        <select id="theme" aria-label="Theme">
+          <option value="system">System auto</option>
+          <option value="teal">Teal</option>
+          <option value="blue">Blue</option>
+          <option value="lavender">Lavender</option>
+          <option value="amber">Amber</option>
+          <option value="light">Light</option>
+        </select>
       </div>
     </header>
 
@@ -81,13 +89,13 @@ hr.sep{border:none;border-top:1px solid var(--line);margin:14px 0}
   </div>
 
 <script>
+/* ---------- Link detection ---------- */
 const longName = i => `312-50v13 Exam - Free Actual Q&As, Page ${i} _ ExamTopics.htm`;
 const candidates = i => [
   encodeURIComponent(longName(i)), // long filename at repo root
   `${i}.html`,                     // short filename at repo root
   `pages/${i}.html`                // short filename under /pages
 ];
-
 async function pickUrl(list){
   for(const url of list){
     try{
@@ -98,6 +106,13 @@ async function pickUrl(list){
   return null;
 }
 
+/* ---------- Page labels (question ranges) ---------- */
+function rangeFor(i){
+  if(i<7){ const start = (i-1)*50+1; const end = i*50; return `${start}–${end}`; }
+  return '301–302';
+}
+
+/* ---------- Build cards ---------- */
 async function build(){
   const grid=document.getElementById('grid');
   const items=[];
@@ -109,20 +124,34 @@ async function build(){
     const a=document.createElement('a');
     a.className='card'+(url?'':' disabled');
     a.href=url||'#';
-    a.setAttribute('aria-label', url ? `Open CEH page ${i}` : `Page ${i} not available`);
+    a.setAttribute('aria-label', url ? `Open page ${i}` : `Page ${i} not available`);
+    a.dataset.label=`${i} ${rangeFor(i)} page ${i}`;
     a.innerHTML=`
-      <span class="badge">Part ${i}</span>
-      <h3 class="card-title">Page ${i}</h3>
-      <p class="card-sub">${url ? 'Ready to view' : 'Missing in repository'}</p>
-      <span class="btn">${url ? 'Open page' : 'Unavailable'}</span>
+      <span class="badge">${url ? 'Ready' : 'Missing'}</span>
+      <div class="num">${i}</div>
+      <div class="sub">Questions ${rangeFor(i)}</div>
+      <div class="chev">›</div>
     `;
-    a.dataset.label=`part ${i} page ${i}`;
     grid.appendChild(a);
   }
 }
-build();
 
-document.getElementById('year').textContent=new Date().getFullYear();
+/* ---------- Theme switcher ---------- */
+const themeSel = document.getElementById('theme');
+function applyTheme(val){
+  const html = document.documentElement;
+  if(val==='system'){ html.removeAttribute('data-theme'); localStorage.setItem('ceh:theme','system'); return; }
+  html.setAttribute('data-theme', val);
+  localStorage.setItem('ceh:theme', val);
+}
+(function initTheme(){
+  const saved = localStorage.getItem('ceh:theme') || 'system';
+  themeSel.value = saved;
+  applyTheme(saved);
+})();
+themeSel.addEventListener('change', e=>applyTheme(e.target.value));
+
+/* ---------- Search ---------- */
 document.getElementById('q').addEventListener('input',e=>{
   const t=e.target.value.toLowerCase().trim();
   document.querySelectorAll('.card').forEach(c=>{
@@ -130,6 +159,10 @@ document.getElementById('q').addEventListener('input',e=>{
     c.style.display = t ? (match ? '' : 'none') : '';
   });
 });
+
+/* ---------- Misc ---------- */
+document.getElementById('year').textContent=new Date().getFullYear();
+build();
 </script>
 </body>
 </html>
