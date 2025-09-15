@@ -1,56 +1,35 @@
 ﻿# CEH Practice Pages
 
-This repository hosts my saved **CEH practice pages** for personal study.  
-I organized the raw HTML into a working GitHub Pages site with:
+📌 Live demo: [View on GitHub Pages](https://haziqachik.github.io/ceh-pages/)
 
-- Clean repo structure (`pages/`, `resources/`, `pdfs/`)
-- A study **timer** with start/pause/reset
-- **Local notes with tabs** (auto-saved in browser)
-- **Bookmark (last page)** to remember progress
-- **Font switcher** (Inter, Poppins, Roboto, System)
-- **Theme switcher** (Teal, Blue, Purple, Amber, Rose, Lime, Gray)
-- **Cursor styles** (Dot, Comet, Ring, Crosshair) for UI experiments
-
-⚠️ **Educational Use Only**  
-All materials are for **personal, non-commercial learning**.  
-This project is to practice:
-
-- Git/GitHub workflows  
-- Static site hosting (GitHub Pages)  
-- Frontend skills (HTML/CSS/JS)  
-- Project structuring & organization  
+This project organizes saved **Certified Ethical Hacker (CEH) practice pages** into a navigable study site.  
+The goal is not just to view questions offline but to **practice frontend, GitHub, and DevOps skills** while making a personal study tool.
 
 ---
 
-## Skills Practiced
-
-- Git & GitHub (commits, branching, repo organization)
-- GitHub Pages (static hosting)
-- HTML/CSS (custom index + UI)
-- JavaScript (timer, notes, localStorage, cursor animations)
-- UI/UX design with themes and fonts
-- Handling saved web resources in a structured way
-
----
-
-## How to Use
-
-1. Open: [CEH Pages](https://haziqachik.github.io/ceh-pages/)  
-2. Click **Page 1–7** to view saved practice pages.  
-3. Use **Ready to study!** to start the timer.  
-4. Write notes in the **Notes tab** (auto-saves locally).  
-5. Use **Bookmark** to save your last page.  
-6. Try the **Font, Theme, and Cursor selectors** for UI customization.
+## ✨ Features
+- 🔖 **Bookmarking** → highlight where you last left off  
+- 🎨 **Theme switcher** → teal, purple, blue, rose, amber, emerald, slate  
+- 🖱️ **Cursor effects** → dot, comet, or disabled  
+- ⏱️ **Study timer** → start/pause/reset, saves progress locally  
+- 📝 **Tabbed study notes** → add/delete/rename, saved to browser  
+- 📂 **Organized repo** → pages/, resources/, pdfs/ for clarity  
 
 ---
 
-## Future Plans
-
-- Light/Dark theme toggle  
-- Search across saved pages  
-- Export notes (Markdown/CSV)  
-- Mobile-optimized layout  
+## 🛠 Skills Practiced
+- Git & GitHub (branching, merging, PRs, Pages hosting)  
+- HTML/CSS/JS (themes, UI, localStorage, timers)  
+- Repo organization & static hosting  
+- Documentation & portfolio presentation  
 
 ---
 
-📌 Part of my IT learning portfolio: [@haziqachik](https://github.com/haziqachik)
+⚠️ **Notice**:  
+All pages (1–7) are saved exam practice content, used **strictly for personal, educational purposes**.  
+Not for resale, redistribution, or public sharing.  
+
+---
+
+✍️ *Part of my IT learning portfolio* → [Haziq on GitHub](https://github.com/haziqachik)  
+_Last updated: 2025-09-15_
