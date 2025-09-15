@@ -7,57 +7,66 @@
   <style>
     body {
       font-family: system-ui, Segoe UI, Arial, sans-serif;
-      margin: 40px auto;
-      max-width: 720px;
-      line-height: 1.6;
-      color: #333;
+      margin: 0;
+      padding: 0;
+      background: #f9fafb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 800px;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
     }
     h1 {
-      text-align: center;
-      margin-bottom: 1em;
+      margin-bottom: 24px;
+      font-size: 1.8rem;
+      color: #222;
     }
-    ul {
-      list-style: none;
-      padding: 0;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
     }
-    li {
-      margin: 12px 0;
-    }
-    a {
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 20px;
       text-decoration: none;
-      padding: 10px 16px;
-      background: #f5f5f5;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      display: inline-block;
-      width: 100%;
-      box-sizing: border-box;
       color: #333;
+      font-size: 1rem;
+      transition: all 0.2s ease-in-out;
     }
-    a:hover {
-      background: #e0e0e0;
+    .card:hover {
+      background: #f3f4f6;
+      transform: translateY(-2px);
     }
     footer {
-      margin-top: 2em;
-      font-size: 0.9em;
+      margin-top: 24px;
+      font-size: 0.85rem;
       color: #666;
-      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>CEH Practice Pages</h1>
-  <ul>
-    <li><a href="312-50v13 Exam - Free Actual Q&As, Page 1 _ ExamTopics.htm">Part 1</a></li>
-    <li><a href="312-50v13 Exam - Free Actual Q&As, Page 2 _ ExamTopics.htm">Part 2</a></li>
-    <li><a href="312-50v13 Exam - Free Actual Q&As, Page 3 _ ExamTopics.htm">Part 3</a></li>
-    <li><a href="312-50v13 Exam - Free Actual Q&As, Page 4 _ ExamTopics.htm">Part 4</a></li>
-    <li><a href="312-50v13 Exam - Free Actual Q&As, Page 5 _ ExamTopics.htm">Part 5</a></li>
-    <li><a href="312-50v13 Exam - Free Actual Q&As, Page 6 _ ExamTopics.htm">Part 6</a></li>
-    <li><a href="312-50v13 Exam - Free Actual Q&As, Page 7 _ ExamTopics.htm">Part 7</a></li>
-  </ul>
-  <footer>
-    <p>📌 Personal educational archive for CEH practice. Not for distribution.</p>
-  </footer>
+  <div class="container">
+    <h1>CEH Practice Pages</h1>
+    <div class="grid">
+      <a class="card" href="312-50v13 Exam - Free Actual Q&As, Page 1 _ ExamTopics.htm">Part 1</a>
+      <a class="card" href="312-50v13 Exam - Free Actual Q&As, Page 2 _ ExamTopics.htm">Part 2</a>
+      <a class="card" href="312-50v13 Exam - Free Actual Q&As, Page 3 _ ExamTopics.htm">Part 3</a>
+      <a class="card" href="312-50v13 Exam - Free Actual Q&As, Page 4 _ ExamTopics.htm">Part 4</a>
+      <a class="card" href="312-50v13 Exam - Free Actual Q&As, Page 5 _ ExamTopics.htm">Part 5</a>
+      <a class="card" href="312-50v13 Exam - Free Actual Q&As, Page 6 _ ExamTopics.htm">Part 6</a>
+      <a class="card" href="312-50v13 Exam - Free Actual Q&As, Page 7 _ ExamTopics.htm">Part 7</a>
+    </div>
+    <footer>
+      📌 Educational archive for CEH practice (personal use only)
+    </footer>
+  </div>
 </body>
 </html>
