@@ -1,51 +1,96 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CEH Practice Pages</title>
-  <style>
-    :root { --bg1:#e9f0ff; --bg2:#f9fafc; --card:#ffffff; --ink:#111; --muted:#666; --line:#e5e7eb; }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font:16px/1.5 system-ui, Segoe UI, Arial, sans-serif;
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
-      background: linear-gradient(135deg, var(--bg1), var(--bg2));
-      color:var(--ink);
-    }
-    .wrap{
-      width:clamp(320px, 92vw, 920px);
-      background:var(--card); border:1px solid var(--line); border-radius:14px;
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-      padding:28px 28px 18px;
-    }
-    h1{margin:0 0 18px;font-size:1.6rem}
-    p.note{margin:0 0 18px;color:var(--muted);font-size:.95rem}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
-    a.item{
-      display:block; text-decoration:none; color:var(--ink); background:#f6f8fc;
-      border:1px solid var(--line); border-radius:10px; padding:14px 16px; font-weight:600;
-      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
-    }
-    a.item:hover{transform:translateY(-2px); box-shadow:0 6px 16px rgba(0,0,0,.08); background:#eef3ff}
-    footer{margin-top:16px; padding-top:12px; border-top:1px dashed var(--line); color:var(--muted); font-size:.9rem}
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CEH Practice Pages</title>
+<style>
+:root{--bg:#0a0b0e;--fg:#e6e9ef;--muted:#9aa4b2;--card:#12151b;--accent:#22c55e;--ring:rgba(34,197,94,.35)}
+@media (prefers-color-scheme: light){:root{--bg:#f7f7fb;--fg:#101214;--muted:#5b6673;--card:#ffffff;--accent:#2563eb;--ring:rgba(37,99,235,.25)}}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 system-ui,Segoe UI,Roboto,Arial;background:
+  radial-gradient(1200px 600px at 20% -10%,#1b1f2a 0%,transparent 60%),var(--bg);color:var(--fg)}
+.container{max-width:950px;padding:32px;margin:0 auto}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+h1{font-size:clamp(22px,3.2vw,30px);margin:0}
+.desc{color:var(--muted);font-size:14px}
+.controls{display:flex;gap:8px;align-items:center}
+input[type="search"]{padding:10px 12px;border-radius:10px;border:1px solid #2a3140;background:var(--card);color:var(--fg);outline:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:16px}
+.card{display:block;padding:18px;border-radius:14px;background:var(--card);border:1px solid #1f2633;text-decoration:none;color:var(--fg);position:relative;
+      box-shadow:0 1px 0 #0005,0 8px 24px #0003;transition:transform .15s,border-color .15s,box-shadow .2s}
+.card:hover{transform:translateY(-2px);border-color:var(--accent);box-shadow:0 6px 28px var(--ring)}
+.badge{position:absolute;top:10px;right:10px;font-size:12px;color:var(--muted)}
+.card-title{font-weight:600;font-size:18px;margin:0 0 6px}
+.card-sub{color:var(--muted);font-size:13px;margin:0}
+.footer{margin-top:28px;color:var(--muted);font-size:12px}
+.disabled{opacity:.5;pointer-events:none}
+</style>
 </head>
 <body>
-  <main class="wrap">
-    <h1>CEH Practice Pages</h1>
-    <p class="note">Personal educational archive. Original study content belongs to its provider.</p>
-    <section class="grid">
-      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 1 _ ExamTopics.htm">Part 1</a>
-      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 2 _ ExamTopics.htm">Part 2</a>
-      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 3 _ ExamTopics.htm">Part 3</a>
-      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 4 _ ExamTopics.htm">Part 4</a>
-      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 5 _ ExamTopics.htm">Part 5</a>
-      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 6 _ ExamTopics.htm">Part 6</a>
-      <a class="item" href="312-50v13 Exam - Free Actual Q&As, Page 7 _ ExamTopics.htm">Part 7</a>
-    </section>
-    <footer>⚠️ Educational use only · Not for redistribution</footer>
-  </main>
+  <div class="container">
+    <header>
+      <div>
+        <h1>CEH Practice Pages</h1>
+        <div class="desc">Parts 1–7. Links auto-detect whether the long or short filenames exist.</div>
+      </div>
+      <div class="controls">
+        <input id="q" type="search" placeholder="Filter… (try 1, 2, 3…)" />
+      </div>
+    </header>
+
+    <div id="grid" class="grid"></div>
+
+    <div class="footer">
+      For personal educational use only. © <span id="year"></span>
+    </div>
+  </div>
+
+<script>
+const longName = i => `312-50v13 Exam - Free Actual Q&As, Page ${i} _ ExamTopics.htm`;
+const candidates = i => [
+  encodeURIComponent(longName(i)), // long name at repo root
+  `${i}.html`,                     // short name at repo root
+  `pages/${i}.html`                // short name under /pages (if you ever keep that)
+];
+
+async function pickUrl(list){
+  for(const url of list){
+    try{
+      const r = await fetch(url,{method:'HEAD',cache:'no-store'});
+      if(r.ok) return url;
+    }catch(e){}
+  }
+  return null;
+}
+
+async function build(){
+  const grid=document.getElementById('grid');
+  const items=[];
+  for(let i=1;i<=7;i++){
+    const url=await pickUrl(candidates(i));
+    items.push({i,url});
+  }
+  for(const {i,url} of items){
+    const a=document.createElement('a');
+    a.className='card'+(url?'':' disabled');
+    a.href=url||'#';
+    a.innerHTML=`<div class="badge">Part ${i}</div>
+      <h3 class="card-title">Page ${i}</h3>
+      <p class="card-sub">${url?'Open practice page':'Not found in repo'}</p>`;
+    a.dataset.label=`part ${i} page ${i}`;
+    grid.appendChild(a);
+  }
+}
+build();
+
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('q').addEventListener('input',e=>{
+  const t=e.target.value.toLowerCase();
+  document.querySelectorAll('.card').forEach(c=>{
+    c.style.display=c.dataset.label.includes(t)?'':'none';
+  });
+});
+</script>
 </body>
 </html>
