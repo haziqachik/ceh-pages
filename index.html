@@ -1,168 +1,206 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>CEH Practice Pages</title>
-<style>
-:root{
-  --bg:#0f1115; --fg:#e9edf3; --muted:#a2acba; --card:#171c24; --line:#262d38;
-  --accent:#6fc2b0; --ring:rgba(111,194,176,.25);
-}
-html[data-theme="blue"]{ --accent:#6aa7ff; --ring:rgba(106,167,255,.25);}
-html[data-theme="lavender"]{ --accent:#b692f6; --ring:rgba(182,146,246,.25);}
-html[data-theme="amber"]{ --accent:#f2b972; --ring:rgba(242,185,114,.25);}
-html[data-theme="light"]{ color-scheme:light;
-  --bg:#f8faff; --fg:#0e1115; --muted:#5f6b79; --card:#ffffff; --line:#e6eaf1;
-  --accent:#2d8cff; --ring:rgba(45,140,255,.20);
-}
-*{box-sizing:border-box}
-body{margin:0;font:16px/1.55 system-ui,Segoe UI,Roboto,Arial;background:var(--bg);color:var(--fg)}
-.container{max-width:960px;padding:28px 20px;margin:0 auto}
-header{display:flex;flex-direction:column;gap:10px}
-h1{margin:0;font-size:26px}
-.desc{color:var(--muted);font-size:14px}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CEH Practice Pages</title>
 
-/* Controls */
-.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-select,input[type="search"],button{
-  padding:8px 12px;border-radius:10px;border:1px solid var(--line);
-  background:var(--card);color:var(--fg);outline:none;font-size:14px;
-}
-button{cursor:pointer}
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-/* Timer */
-.timer{font-weight:600;font-size:18px;margin-top:8px}
+  <style>
+    :root {
+      --font: 'Inter', system-ui, sans-serif;
+      --bg: #0b0d10;
+      --card: #12151a;
+      --muted: #8a97a7;
+      --text: #eaf1fb;
+      --accent: #4fd1c5;
+      --border: #1f2530;
+    }
 
-/* Grid */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:18px}
-.card{
-  display:block;padding:18px;border-radius:16px;background:var(--card);border:1px solid var(--line);
-  text-decoration:none;color:var(--fg);position:relative;transition:.15s;
-}
-.card:hover{transform:translateY(-2px);box-shadow:0 8px 20px var(--ring);border-color:var(--accent)}
-.num{font-weight:700;font-size:26px}
-.sub{color:var(--muted);font-size:13.5px;margin-top:4px}
-.badge{
-  position:absolute;top:10px;right:12px;padding:4px 10px;font-size:12px;
-  border-radius:999px;background:var(--accent);color:#fff;font-weight:600;
-}
-.card.is-last{outline:2px solid var(--accent)}
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font: 16px/1.5 var(--font);
+      color: var(--text);
+      background: radial-gradient(1200px 1200px at 10% -10%, #16202d 0, #0b0d10 60%);
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .container { width: min(980px, 100%); }
+    .header { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; margin-bottom: 16px; }
+    .title { font-size: 20px; font-weight: 600; }
+    .controls { display: flex; gap: 10px; flex-wrap: wrap; }
+    select, button, input {
+      background: #0e1116; color: var(--text);
+      border: 1px solid var(--border); border-radius: 6px;
+      padding: 6px 8px; font-size: 14px;
+    }
+    button:hover { border-color: #2a3342; cursor: pointer; }
 
-/* Notes */
-.notes{margin-top:30px}
-.notes textarea{
-  width:100%;min-height:120px;padding:12px;border-radius:10px;
-  border:1px solid var(--line);background:var(--card);color:var(--fg);
-  font:15px/1.4 system-ui,Segoe UI,Roboto,Arial;resize:vertical;
-}
-.footer{margin-top:20px;color:var(--muted);font-size:12.5px}
-</style>
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px; margin-top: 10px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      cursor: pointer;
+      transition: transform .1s ease, box-shadow .2s ease;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
+    .range { font-size: 12px; color: var(--muted); }
+
+    .panel { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; margin-top: 16px; }
+    @media (max-width: 900px) { .panel { grid-template-columns: 1fr; } }
+
+    .box { background: #10151c; border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+    .box h4 { margin-top: 0; }
+
+    .ready { display: inline-flex; align-items: center; gap: 8px;
+      background: #0d131b; border: 1px dashed #2a3342;
+      padding: 8px 10px; border-radius: 10px; cursor: pointer;
+    }
+    .badge { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .timer { font-variant-numeric: tabular-nums; margin-left: 8px; }
+
+    textarea { width: 100%; min-height: 150px; resize: vertical;
+      background: #0b1016; color: var(--text);
+      border: 1px solid var(--border); border-radius: 8px; padding: 8px;
+    }
+    .notes-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+    .tab { padding: 4px 8px; border: 1px solid var(--border); border-radius: 8px; background: #0c1016; font-size: 13px; }
+    .tab.active { background: #0f151e; border-color: #2a3342; }
+    .addtab { border: 1px dashed #2a3342; }
+
+    /* Animated cursor */
+    .cursor-dot {
+      position: fixed; pointer-events: none; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--accent);
+      opacity: .75; transform: translate(-50%, -50%);
+      animation: fade .6s ease-out forwards;
+    }
+    @keyframes fade { to { opacity: 0; transform: translate(-50%,-50%) scale(.5); } }
+    .cursor-off .cursor-dot { display: none; }
+  </style>
 </head>
+
 <body>
-  <div class="container">
-    <header>
-      <h1>CEH Practice Set</h1>
-      <div class="desc">Seven saved pages for personal study. Track your progress below.</div>
-      <div class="controls">
-        <input id="q" type="search" placeholder="Filter…" />
-        <select id="last">
-          <option value="">Bookmark: none</option>
-          <option value="1">Last page: 1</option>
-          <option value="2">Last page: 2</option>
-          <option value="3">Last page: 3</option>
-          <option value="4">Last page: 4</option>
-          <option value="5">Last page: 5</option>
-          <option value="6">Last page: 6</option>
-          <option value="7">Last page: 7</option>
+<div class="container">
+  <div class="header">
+    <div class="title">CEH Practice Pages</div>
+    <div class="controls">
+      <label>Font:
+        <select id="fontSel">
+          <option value="'Inter',sans-serif">Inter</option>
+          <option value="'Poppins',sans-serif">Poppins</option>
+          <option value="'Roboto',sans-serif">Roboto</option>
+          <option value="system-ui,sans-serif">System</option>
         </select>
-        <select id="theme">
-          <option value="system">Theme: System</option>
-          <option value="blue">Blue</option>
-          <option value="lavender">Lavender</option>
-          <option value="amber">Amber</option>
-          <option value="light">Light</option>
+      </label>
+      <label>Cursor:
+        <select id="cursorSel">
+          <option value="on">Animated</option>
+          <option value="off">Static</option>
         </select>
-      </div>
-      <div class="controls">
-        <div class="timer" id="timer">00:00</div>
-        <button id="startBtn">Start</button>
-        <button id="stopBtn">Stop</button>
-        <button id="resetBtn">Reset</button>
-      </div>
-    </header>
-
-    <div id="grid" class="grid"></div>
-
-    <div class="notes">
-      <h3>Study Notes</h3>
-      <textarea id="notesBox" placeholder="Write your thoughts, reminders, or key points here..."></textarea>
-    </div>
-
-    <div class="footer">
-      Educational use only • © <span id="year"></span>
+      </label>
+      <label>Bookmark (last page):
+        <input id="bm" type="number" min="1" max="7" style="width:60px">
+      </label>
     </div>
   </div>
 
+  <!-- Grid of Pages -->
+  <div class="grid" id="grid"></div>
+
+  <!-- Study + Notes -->
+  <div class="panel">
+    <div class="box">
+      <h4>Study Session</h4>
+      <div class="ready" id="readyBtn">
+        <span class="badge"></span>
+        <span id="readyText">Ready to study!</span>
+        <span class="timer" id="timer">00:00:00</span>
+      </div>
+      <div class="small">Press <b>R</b> to start/pause, <b>0</b> to reset.</div>
+    </div>
+
+    <div class="box">
+      <h4>Study Notes</h4>
+      <div class="notes-tabs" id="tabs"></div>
+      <textarea id="notes" placeholder="Write your notes (auto-saves)"></textarea>
+      <div id="savedInfo" style="font-size:12px;color:var(--muted)">Saved.</div>
+    </div>
+  </div>
+
+  <hr>
+  <div style="font-size:12px;color:var(--muted)">Educational use only. Pages are saved copies for study.</div>
+</div>
+
 <script>
-/* Link candidates */
-const longName=i=>`312-50v13 Exam - Free Actual Q&As, Page ${i} _ ExamTopics.htm`;
-const candidates=i=>[encodeURIComponent(longName(i)),`${i}.html`,`pages/${i}.html`];
-async function pickUrl(list){for(const url of list){try{const r=await fetch(url,{method:'HEAD'});if(r.ok)return url}catch(e){}}return null;}
+  // ---------- Config ----------
+  const totalPages = 7;
+  const questionRanges = { 1:"Q1–50",2:"Q51–100",3:"Q101–150",4:"Q151–200",5:"Q201–250",6:"Q251–300",7:"Q301–302" };
 
-/* Question ranges */
-function rangeFor(i){if(i<7){const s=(i-1)*50+1,e=i*50;return `${s}–${e}`;}return '301–302';}
-
-/* Build grid */
-async function build(){
-  const g=document.getElementById('grid');const last=localStorage.getItem('ceh:last')||'';
-  for(let i=1;i<=7;i++){
-    const url=await pickUrl(candidates(i));
-    const a=document.createElement('a');a.className='card';if(!url)a.classList.add('disabled');
-    if(last==i)a.classList.add('is-last');
-    a.href=url||'#';a.dataset.label=`${i} ${rangeFor(i)}`;
-    a.innerHTML=`<span class="badge">${url?'Ready to study!':'Missing'}</span>
-                 <div class="num">${i}</div><div class="sub">Questions ${rangeFor(i)}</div>`;
-    g.appendChild(a);
+  // ---------- Build grid ----------
+  const grid=document.getElementById('grid');
+  for(let i=1;i<=totalPages;i++){
+    const card=document.createElement('div'); card.className='card';
+    card.innerHTML=`<h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div>`;
+    card.onclick=()=>openPage(i);
+    grid.appendChild(card);
   }
-}
+  async function openPage(n){
+    const short=`pages/${n}.html`;
+    const long=encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
+    const ok=await fetch(long,{method:"HEAD"}).then(r=>r.ok).catch(()=>false);
+    location.href= ok?long:short;
+  }
 
-/* Bookmark */
-const lastSel=document.getElementById('last');
-lastSel.value=localStorage.getItem('ceh:last')||'';
-lastSel.onchange=e=>{if(e.target.value)localStorage.setItem('ceh:last',e.target.value);
- else localStorage.removeItem('ceh:last');location.reload();};
+  // ---------- Bookmark ----------
+  const bm=document.getElementById('bm');
+  bm.value=localStorage.getItem('bookmark')||'';
+  bm.addEventListener('change',()=>localStorage.setItem('bookmark',bm.value));
 
-/* Theme */
-const themeSel=document.getElementById('theme');
-function applyTheme(val){const html=document.documentElement;
- if(val==='system'){html.removeAttribute('data-theme');localStorage.setItem('ceh:theme','system');return;}
- html.setAttribute('data-theme',val);localStorage.setItem('ceh:theme',val);}
-(function(){const s=localStorage.getItem('ceh:theme')||'system';themeSel.value=s;applyTheme(s);})();
-themeSel.onchange=e=>applyTheme(e.target.value);
+  // ---------- Timer ----------
+  const readyBtn=document.getElementById('readyBtn');
+  const readyText=document.getElementById('readyText');
+  const timerEl=document.getElementById('timer');
+  let ticking=false, startTs=+localStorage.getItem('timer_start')||0;
+  let elapsed=+localStorage.getItem('timer_elapsed')||0;
 
-/* Timer */
-let t=0,interval=null;
-function update(){document.getElementById('timer').textContent=
- String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');}
-document.getElementById('startBtn').onclick=()=>{if(interval)return;interval=setInterval(()=>{t++;update();},1000);};
-document.getElementById('stopBtn').onclick=()=>{clearInterval(interval);interval=null;};
-document.getElementById('resetBtn').onclick=()=>{t=0;update();};
-update();
+  function fmt(s){const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),sec=String(Math.floor(s%60)).padStart(2,'0');return `${h}:${m}:${sec}`;}
+  function paint(){const now=Date.now();const secs=elapsed+(ticking?(now-startTs)/1000:0);timerEl.textContent=fmt(secs);requestAnimationFrame(paint);}
+  function start(){if(ticking)return;ticking=true;startTs=Date.now();localStorage.setItem('timer_start',startTs);readyText.textContent='Studying';}
+  function pause(){if(!ticking)return;ticking=false;elapsed+=(Date.now()-startTs)/1000;localStorage.setItem('timer_elapsed',elapsed);localStorage.removeItem('timer_start');readyText.textContent='Paused';}
+  function reset(){ticking=false;elapsed=0;localStorage.removeItem('timer_start');localStorage.setItem('timer_elapsed',0);readyText.textContent='Ready to study!';}
+  readyBtn.onclick=()=>ticking?pause():start();
+  document.addEventListener('keydown',e=>{if(e.key==='0')reset();if(e.key.toLowerCase()==='r')ticking?pause():start();});
+  paint();
 
-/* Notes (localStorage) */
-const box=document.getElementById('notesBox');
-box.value=localStorage.getItem('ceh:notes')||'';
-box.oninput=()=>localStorage.setItem('ceh:notes',box.value);
+  // ---------- Notes with Tabs ----------
+  const notes=document.getElementById('notes'), savedInfo=document.getElementById('savedInfo'), tabsWrap=document.getElementById('tabs');
+  function saveTabs(t){localStorage.setItem('note_tabs',JSON.stringify(t));}
+  function loadTabs(){let t=JSON.parse(localStorage.getItem('note_tabs')||'[]'); if(!t.length) t=['General']; return t;}
+  function keyFor(n){return 'note_'+n;}
+  function renderTabs(){tabsWrap.innerHTML='';tabs.forEach(n=>{const el=document.createElement('button');el.className='tab'+(n===active?' active':'');el.textContent=n;el.onclick=()=>{active=n;localStorage.setItem('note_active',n);loadNote();renderTabs();};el.oncontextmenu=ev=>{ev.preventDefault();const nn=prompt('Rename tab',n);if(nn){tabs[tabs.indexOf(n)]=nn;if(active===n)active=nn;saveTabs(tabs);localStorage.setItem('note_active',active);renderTabs();loadNote();}};tabsWrap.appendChild(el);});const add=document.createElement('button');add.className='addtab';add.textContent='+ Add';add.onclick=()=>{const nn=prompt('New tab name');if(!nn)return;tabs.push(nn);saveTabs(tabs);active=nn;localStorage.setItem('note_active',active);renderTabs();loadNote();};tabsWrap.appendChild(add);}
+  function loadNote(){notes.value=localStorage.getItem(keyFor(active))||'';savedInfo.textContent='Loaded '+active;}
+  let tabs=loadTabs();let active=localStorage.getItem('note_active')||tabs[0];renderTabs();loadNote();
+  let saveTO;notes.addEventListener('input',()=>{clearTimeout(saveTO);saveTO=setTimeout(()=>{localStorage.setItem(keyFor(active),notes.value);savedInfo.textContent='Saved '+new Date().toLocaleTimeString();},300);});
 
-/* Search */
-document.getElementById('q').oninput=e=>{
-  const t=e.target.value.toLowerCase();
-  document.querySelectorAll('.card').forEach(c=>{c.style.display=c.dataset.label.includes(t)?'':'none';});
-};
-
-document.getElementById('year').textContent=new Date().getFullYear();
-build();
+  // ---------- Font & Cursor ----------
+  const fontSel=document.getElementById('fontSel');const cursorSel=document.getElementById('cursorSel');
+  const root=document.documentElement;
+  fontSel.value=localStorage.getItem('fontSel')||fontSel.value;root.style.setProperty('--font',fontSel.value);
+  fontSel.onchange=()=>{root.style.setProperty('--font',fontSel.value);localStorage.setItem('fontSel',fontSel.value);};
+  cursorSel.value=localStorage.getItem('cursorSel')||'on';document.body.classList.toggle('cursor-off',cursorSel.value==='off');
+  cursorSel.onchange=()=>{localStorage.setItem('cursorSel',cursorSel.value);document.body.classList.toggle('cursor-off',cursorSel.value==='off');};
+  let lastDot=0;window.addEventListener('mousemove',e=>{if(cursorSel.value==='off')return;const now=performance.now();if(now-lastDot<18)return;lastDot=now;const dot=document.createElement('div');dot.className='cursor-dot';dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';document.body.appendChild(dot);setTimeout(()=>dot.remove(),600);});
 </script>
 </body>
 </html>
