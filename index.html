@@ -4,92 +4,64 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>CEH Practice Pages</title>
-
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --font: 'Inter', system-ui, sans-serif;
-      --bg: #0b0d10;
-      --card: #12151a;
-      --muted: #8a97a7;
-      --text: #eaf1fb;
-      --accent: #4fd1c5;
-      --border: #1f2530;
+      --font: 'Inter', sans-serif;
+      --bg:#0b0d10; --card:#12151a; --muted:#8a97a7; --text:#eaf1fb; --accent:#4fd1c5; --border:#1f2530;
     }
+    [data-theme="blue"]  { --accent:#4299e1; }
+    [data-theme="purple"]{ --accent:#9f7aea; }
+    [data-theme="amber"] { --accent:#f6ad55; }
+    [data-theme="rose"]  { --accent:#f56565; }
+    [data-theme="lime"]  { --accent:#84cc16; }
+    [data-theme="gray"]  { --accent:#a0aec0; }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; margin: 0; }
     body {
-      font: 16px/1.5 var(--font);
-      color: var(--text);
-      background: radial-gradient(1200px 1200px at 10% -10%, #16202d 0, #0b0d10 60%);
-      padding: 24px;
-      display: flex;
-      justify-content: center;
+      margin:0; font:16px/1.5 var(--font); color:var(--text);
+      background:radial-gradient(1200px 1200px at 10% -10%, #16202d 0, #0b0d10 60%);
+      padding:24px; display:flex; justify-content:center;
     }
-    .container { width: min(980px, 100%); }
-    .header { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; margin-bottom: 16px; }
-    .title { font-size: 20px; font-weight: 600; }
-    .controls { display: flex; gap: 10px; flex-wrap: wrap; }
-    select, button, input {
-      background: #0e1116; color: var(--text);
-      border: 1px solid var(--border); border-radius: 6px;
-      padding: 6px 8px; font-size: 14px;
+    .container { width:min(980px,100%);}
+    .header { display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between; margin-bottom:16px;}
+    .title { font-size:20px; font-weight:600; }
+    .controls {display:flex; gap:10px; flex-wrap:wrap}
+    select,input,button {
+      background:#0e1116; color:var(--text); border:1px solid var(--border); border-radius:8px; padding:6px 8px; outline:0;
     }
-    button:hover { border-color: #2a3342; cursor: pointer; }
-
-    .grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 12px; margin-top: 10px;
-    }
+    .grid {display:grid; grid-template-columns:repeat(7,1fr); gap:10px; margin-top:10px}
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      display: flex; flex-direction: column; justify-content: space-between;
-      cursor: pointer;
-      transition: transform .1s ease, box-shadow .2s ease;
+      background:linear-gradient(180deg,#121821,#10151c); border:1px solid var(--border);
+      border-radius:14px; padding:14px; aspect-ratio:1/1;
+      display:flex; flex-direction:column; justify-content:space-between;
+      cursor:pointer; transition:.15s;
     }
-    .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.35); }
-    .range { font-size: 12px; color: var(--muted); }
+    .card:hover { transform:translateY(-2px); border-color:var(--accent); box-shadow:0 6px 18px rgba(0,0,0,.35);}
+    .card h3 {margin:0; font-size:18px;}
+    .range{color:var(--muted); font-size:12px}
+    .go{font-size:12px; padding:6px 8px; border-radius:8px; border:1px solid var(--border);}
+    .panel{display:grid; gap:14px; grid-template-columns:1fr 1fr; margin-top:16px}
+    @media (max-width:900px){.panel{grid-template-columns:1fr}}
+    .box{background:linear-gradient(180deg,#11161e,#0f141b); border:1px solid var(--border); border-radius:14px; padding:14px;}
+    .box h4{margin:0 0 8px 0;}
+    .ready{display:inline-flex; align-items:center; gap:8px; border:1px dashed var(--border); padding:8px 10px; border-radius:10px; cursor:pointer;}
+    .badge{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent);}
+    .timer{font-variant-numeric:tabular-nums; font-size:18px; margin-left:8px}
+    textarea{width:100%; min-height:160px; resize:vertical; background:#0b1016; color:var(--text); border:1px solid var(--border); border-radius:10px; padding:10px;}
+    .notes-tabs{display:flex; gap:6px; flex-wrap:wrap; margin:8px 0}
+    .tab{padding:6px 10px; border-radius:10px; border:1px solid var(--border); cursor:pointer;}
+    .tab.active{background:#0f151e; border-color:var(--accent);}
+    .addtab{border:1px dashed var(--border); background:#0c1016; cursor:pointer;}
 
-    .panel { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; margin-top: 16px; }
-    @media (max-width: 900px) { .panel { grid-template-columns: 1fr; } }
-
-    .box { background: #10151c; border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
-    .box h4 { margin-top: 0; }
-
-    .ready { display: inline-flex; align-items: center; gap: 8px;
-      background: #0d131b; border: 1px dashed #2a3342;
-      padding: 8px 10px; border-radius: 10px; cursor: pointer;
-    }
-    .badge { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
-    .timer { font-variant-numeric: tabular-nums; margin-left: 8px; }
-
-    textarea { width: 100%; min-height: 150px; resize: vertical;
-      background: #0b1016; color: var(--text);
-      border: 1px solid var(--border); border-radius: 8px; padding: 8px;
-    }
-    .notes-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
-    .tab { padding: 4px 8px; border: 1px solid var(--border); border-radius: 8px; background: #0c1016; font-size: 13px; }
-    .tab.active { background: #0f151e; border-color: #2a3342; }
-    .addtab { border: 1px dashed #2a3342; }
-
-    /* Animated cursor */
-    .cursor-dot {
-      position: fixed; pointer-events: none; width: 6px; height: 6px;
-      border-radius: 50%; background: var(--accent);
-      opacity: .75; transform: translate(-50%, -50%);
-      animation: fade .6s ease-out forwards;
-    }
-    @keyframes fade { to { opacity: 0; transform: translate(-50%,-50%) scale(.5); } }
-    .cursor-off .cursor-dot { display: none; }
+    /* Cursor styles */
+    .cursor-dot,.cursor-comet,.cursor-ring {position:fixed; pointer-events:none; transform:translate(-50%,-50%);}
+    .cursor-dot {width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.75;animation:fade .6s ease-out forwards;}
+    .cursor-comet{width:10px;height:10px;border-radius:50%;background:var(--accent);filter:blur(1px);opacity:.6;animation:fade .9s ease-out forwards;}
+    .cursor-ring{width:18px;height:18px;border:2px solid var(--accent);border-radius:50%;opacity:.9;animation:ringFade .45s ease-out forwards;}
+    @keyframes fade{to{opacity:0; transform:translate(-50%,-50%) scale(0.5)}}
+    @keyframes ringFade{to{opacity:0; transform:translate(-50%,-50%) scale(1.8)}}
   </style>
 </head>
-
 <body>
 <div class="container">
   <div class="header">
@@ -103,104 +75,99 @@
           <option value="system-ui,sans-serif">System</option>
         </select>
       </label>
-      <label>Cursor:
-        <select id="cursorSel">
-          <option value="on">Animated</option>
-          <option value="off">Static</option>
+      <label>Theme:
+        <select id="themeSel">
+          <option value="default">Default (Teal)</option>
+          <option value="blue">Blue</option>
+          <option value="purple">Purple</option>
+          <option value="amber">Amber</option>
+          <option value="rose">Rose</option>
+          <option value="lime">Lime</option>
+          <option value="gray">Gray</option>
         </select>
       </label>
-      <label>Bookmark (last page):
+      <label>Cursor:
+        <select id="cursorSel">
+          <option value="dot">Dot</option>
+          <option value="comet">Comet</option>
+          <option value="ring">Ring</option>
+          <option value="crosshair">Crosshair</option>
+        </select>
+      </label>
+      <label>Bookmark:
         <input id="bm" type="number" min="1" max="7" style="width:60px">
       </label>
     </div>
   </div>
 
-  <!-- Grid of Pages -->
   <div class="grid" id="grid"></div>
 
-  <!-- Study + Notes -->
   <div class="panel">
     <div class="box">
       <h4>Study Session</h4>
-      <div class="ready" id="readyBtn">
-        <span class="badge"></span>
-        <span id="readyText">Ready to study!</span>
-        <span class="timer" id="timer">00:00:00</span>
-      </div>
-      <div class="small">Press <b>R</b> to start/pause, <b>0</b> to reset.</div>
+      <div class="ready" id="readyBtn"><span class="badge"></span><span id="readyText">Ready to study!</span><span class="timer" id="timer">00:00:00</span></div>
     </div>
-
     <div class="box">
       <h4>Study Notes</h4>
       <div class="notes-tabs" id="tabs"></div>
-      <textarea id="notes" placeholder="Write your notes (auto-saves)"></textarea>
-      <div id="savedInfo" style="font-size:12px;color:var(--muted)">Saved.</div>
+      <textarea id="notes" placeholder="Write notes here..."></textarea>
+      <div id="savedInfo" class="small">Saved.</div>
     </div>
   </div>
-
-  <hr>
-  <div style="font-size:12px;color:var(--muted)">Educational use only. Pages are saved copies for study.</div>
 </div>
 
 <script>
-  // ---------- Config ----------
-  const totalPages = 7;
-  const questionRanges = { 1:"Q1–50",2:"Q51–100",3:"Q101–150",4:"Q151–200",5:"Q201–250",6:"Q251–300",7:"Q301–302" };
+const totalPages=7;
+const questionRanges={1:"Q1-50",2:"Q51-100",3:"Q101-150",4:"Q151-200",5:"Q201-250",6:"Q251-300",7:"Q301-302"};
+const grid=document.getElementById('grid');
+for(let i=1;i<=totalPages;i++){
+  const card=document.createElement('div'); card.className='card';
+  card.innerHTML=`<h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div><button class="go">Open</button>`;
+  card.onclick=()=>openPage(i);
+  card.querySelector('.go').onclick=e=>{e.stopPropagation();openPage(i)};
+  grid.appendChild(card);
+}
+async function openPage(n){
+  const long=encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
+  const short=`pages/${n}.html`;
+  location.href=await fetch(long,{method:"HEAD"}).then(r=>r.ok?long:short).catch(()=>short);
+}
 
-  // ---------- Build grid ----------
-  const grid=document.getElementById('grid');
-  for(let i=1;i<=totalPages;i++){
-    const card=document.createElement('div'); card.className='card';
-    card.innerHTML=`<h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div>`;
-    card.onclick=()=>openPage(i);
-    grid.appendChild(card);
-  }
-  async function openPage(n){
-    const short=`pages/${n}.html`;
-    const long=encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
-    const ok=await fetch(long,{method:"HEAD"}).then(r=>r.ok).catch(()=>false);
-    location.href= ok?long:short;
-  }
+// Bookmark
+const bm=document.getElementById('bm');
+bm.value=localStorage.getItem('bookmark')||'';
+bm.addEventListener('change',()=>localStorage.setItem('bookmark',bm.value));
 
-  // ---------- Bookmark ----------
-  const bm=document.getElementById('bm');
-  bm.value=localStorage.getItem('bookmark')||'';
-  bm.addEventListener('change',()=>localStorage.setItem('bookmark',bm.value));
+// Timer
+let ticking=false,elapsed=+localStorage.getItem('timer_elapsed')||0,startTs=+localStorage.getItem('timer_start')||0;
+const timerEl=document.getElementById('timer'),readyText=document.getElementById('readyText'),readyBtn=document.getElementById('readyBtn');
+function fmt(s){const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),sec=String(Math.floor(s%60)).padStart(2,'0');return `${h}:${m}:${sec}`;}
+function paint(){const now=Date.now();const secs=elapsed+(ticking?(now-startTs)/1000:0);timerEl.textContent=fmt(secs);requestAnimationFrame(paint);}
+function start(){if(ticking)return;ticking=true;startTs=Date.now();localStorage.setItem('timer_start',startTs);readyText.textContent='Studying';}
+function pause(){if(!ticking)return;ticking=false;elapsed+=(Date.now()-startTs)/1000;localStorage.setItem('timer_elapsed',elapsed);localStorage.removeItem('timer_start');readyText.textContent='Paused';}
+function reset(){ticking=false;elapsed=0;localStorage.removeItem('timer_start');localStorage.setItem('timer_elapsed',0);readyText.textContent='Ready to study!';}
+readyBtn.onclick=()=>ticking?pause():start();document.addEventListener('keydown',e=>{if(e.key==='0')reset();if(e.key.toLowerCase()==='r')(ticking?pause():start());});
+paint();
 
-  // ---------- Timer ----------
-  const readyBtn=document.getElementById('readyBtn');
-  const readyText=document.getElementById('readyText');
-  const timerEl=document.getElementById('timer');
-  let ticking=false, startTs=+localStorage.getItem('timer_start')||0;
-  let elapsed=+localStorage.getItem('timer_elapsed')||0;
+// Notes with tabs
+const notes=document.getElementById('notes'),savedInfo=document.getElementById('savedInfo'),tabsWrap=document.getElementById('tabs');
+function saveTabs(t){localStorage.setItem('note_tabs',JSON.stringify(t));}
+function loadTabs(){let t=JSON.parse(localStorage.getItem('note_tabs')||'[]');if(!t.length)t=['General','Page1','Page2'];return t;}
+function keyFor(n){return 'note_'+n;}
+function renderTabs(){tabsWrap.innerHTML='';tabs.forEach(name=>{const el=document.createElement('button');el.className='tab'+(name===active?' active':'');el.textContent=name;el.onclick=()=>{active=name;localStorage.setItem('note_active',active);loadNote();renderTabs();};el.oncontextmenu=e=>{e.preventDefault();const nn=prompt('Rename',name);if(!nn)return;const idx=tabs.indexOf(name);tabs[idx]=nn;if(active===name)active=nn;saveTabs(tabs);localStorage.setItem('note_active',active);renderTabs();loadNote();};tabsWrap.appendChild(el);});const add=document.createElement('button');add.className='addtab';add.textContent='+ Add';add.onclick=()=>{const nn=prompt('New tab');if(!nn)return;tabs.push(nn);saveTabs(tabs);active=nn;localStorage.setItem('note_active',active);renderTabs();loadNote();};tabsWrap.appendChild(add);}
+function loadNote(){notes.value=localStorage.getItem(keyFor(active))||'';savedInfo.textContent='Loaded '+active;}
+let tabs=loadTabs(),active=localStorage.getItem('note_active')||tabs[0];renderTabs();loadNote();
+let saveTO;notes.addEventListener('input',()=>{clearTimeout(saveTO);saveTO=setTimeout(()=>{localStorage.setItem(keyFor(active),notes.value);savedInfo.textContent='Saved '+new Date().toLocaleTimeString();},400);});
 
-  function fmt(s){const h=String(Math.floor(s/3600)).padStart(2,'0'),m=String(Math.floor(s%3600/60)).padStart(2,'0'),sec=String(Math.floor(s%60)).padStart(2,'0');return `${h}:${m}:${sec}`;}
-  function paint(){const now=Date.now();const secs=elapsed+(ticking?(now-startTs)/1000:0);timerEl.textContent=fmt(secs);requestAnimationFrame(paint);}
-  function start(){if(ticking)return;ticking=true;startTs=Date.now();localStorage.setItem('timer_start',startTs);readyText.textContent='Studying';}
-  function pause(){if(!ticking)return;ticking=false;elapsed+=(Date.now()-startTs)/1000;localStorage.setItem('timer_elapsed',elapsed);localStorage.removeItem('timer_start');readyText.textContent='Paused';}
-  function reset(){ticking=false;elapsed=0;localStorage.removeItem('timer_start');localStorage.setItem('timer_elapsed',0);readyText.textContent='Ready to study!';}
-  readyBtn.onclick=()=>ticking?pause():start();
-  document.addEventListener('keydown',e=>{if(e.key==='0')reset();if(e.key.toLowerCase()==='r')ticking?pause():start();});
-  paint();
+// Font + Theme
+const fontSel=document.getElementById('fontSel'),themeSel=document.getElementById('themeSel');const root=document.documentElement;
+fontSel.value=localStorage.getItem('fontSel')||fontSel.value;root.style.setProperty('--font',fontSel.value);fontSel.onchange=()=>{localStorage.setItem('fontSel',fontSel.value);root.style.setProperty('--font',fontSel.value);}
+themeSel.value=localStorage.getItem('themeSel')||'default';document.body.setAttribute('data-theme',themeSel.value);themeSel.onchange=()=>{localStorage.setItem('themeSel',themeSel.value);document.body.setAttribute('data-theme',themeSel.value);}
 
-  // ---------- Notes with Tabs ----------
-  const notes=document.getElementById('notes'), savedInfo=document.getElementById('savedInfo'), tabsWrap=document.getElementById('tabs');
-  function saveTabs(t){localStorage.setItem('note_tabs',JSON.stringify(t));}
-  function loadTabs(){let t=JSON.parse(localStorage.getItem('note_tabs')||'[]'); if(!t.length) t=['General']; return t;}
-  function keyFor(n){return 'note_'+n;}
-  function renderTabs(){tabsWrap.innerHTML='';tabs.forEach(n=>{const el=document.createElement('button');el.className='tab'+(n===active?' active':'');el.textContent=n;el.onclick=()=>{active=n;localStorage.setItem('note_active',n);loadNote();renderTabs();};el.oncontextmenu=ev=>{ev.preventDefault();const nn=prompt('Rename tab',n);if(nn){tabs[tabs.indexOf(n)]=nn;if(active===n)active=nn;saveTabs(tabs);localStorage.setItem('note_active',active);renderTabs();loadNote();}};tabsWrap.appendChild(el);});const add=document.createElement('button');add.className='addtab';add.textContent='+ Add';add.onclick=()=>{const nn=prompt('New tab name');if(!nn)return;tabs.push(nn);saveTabs(tabs);active=nn;localStorage.setItem('note_active',active);renderTabs();loadNote();};tabsWrap.appendChild(add);}
-  function loadNote(){notes.value=localStorage.getItem(keyFor(active))||'';savedInfo.textContent='Loaded '+active;}
-  let tabs=loadTabs();let active=localStorage.getItem('note_active')||tabs[0];renderTabs();loadNote();
-  let saveTO;notes.addEventListener('input',()=>{clearTimeout(saveTO);saveTO=setTimeout(()=>{localStorage.setItem(keyFor(active),notes.value);savedInfo.textContent='Saved '+new Date().toLocaleTimeString();},300);});
-
-  // ---------- Font & Cursor ----------
-  const fontSel=document.getElementById('fontSel');const cursorSel=document.getElementById('cursorSel');
-  const root=document.documentElement;
-  fontSel.value=localStorage.getItem('fontSel')||fontSel.value;root.style.setProperty('--font',fontSel.value);
-  fontSel.onchange=()=>{root.style.setProperty('--font',fontSel.value);localStorage.setItem('fontSel',fontSel.value);};
-  cursorSel.value=localStorage.getItem('cursorSel')||'on';document.body.classList.toggle('cursor-off',cursorSel.value==='off');
-  cursorSel.onchange=()=>{localStorage.setItem('cursorSel',cursorSel.value);document.body.classList.toggle('cursor-off',cursorSel.value==='off');};
-  let lastDot=0;window.addEventListener('mousemove',e=>{if(cursorSel.value==='off')return;const now=performance.now();if(now-lastDot<18)return;lastDot=now;const dot=document.createElement('div');dot.className='cursor-dot';dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';document.body.appendChild(dot);setTimeout(()=>dot.remove(),600);});
+// Cursor
+const cursorSel=document.getElementById('cursorSel');cursorSel.value=localStorage.getItem('cursorSel')||'dot';cursorSel.onchange=()=>{localStorage.setItem('cursorSel',cursorSel.value);}
+let lastDot=0;window.addEventListener('mousemove',e=>{const mode=cursorSel.value,now=performance.now();if(mode==='dot'){if(now-lastDot<18)return;lastDot=now;spawn('cursor-dot',e.clientX,e.clientY,600);}else if(mode==='comet'){if(now-lastDot<28)return;lastDot=now;spawn('cursor-comet',e.clientX,e.clientY,900);}else if(mode==='ring'){spawn('cursor-ring',e.clientX,e.clientY,450);}else if(mode==='crosshair'){document.body.style.cursor='crosshair';}});
+function spawn(cls,x,y,ttl=700){const el=document.createElement('div');el.className=cls;el.style.left=x+'px';el.style.top=y+'px';document.body.appendChild(el);setTimeout(()=>el.remove(),ttl);}
 </script>
 </body>
 </html>
