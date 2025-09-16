@@ -1,6 +1,18 @@
-# CEH Practice Pages
+﻿# CEH Practice Pages
 
 A single-page study hub for the Certified Ethical Hacker (CEH) practice questions that I exported from ExamTopics. The page layers in UI exercises (themes, timers, notes) so I can practice frontend + DevOps skills while reviewing the material offline.
+
+## Live Demo
+
+- https://haziqachik.github.io/ceh-pages/
+
+## Release & Evidence
+
+- [Release v1.4](https://github.com/haziqachik/ceh-pages/releases/tag/v1.4)
+- [UAT Sign-off](UAT-SIGNOFF.md)
+- [Analysis & Plans](docs/analysis/)
+- [Reports & Diffs](docs/reports/)
+- [Changelog](CHANGELOG.md)
 
 ## Repository Structure
 - `index.html` - landing page with the navigation grid, theme selector, timer, and tabbed notes
@@ -34,5 +46,4 @@ A single-page study hub for the Certified Ethical Hacker (CEH) practice question
 - Content is saved for personal, educational use only. Please do not redistribute.
 - The site relies on `localStorage`; browsers that block it (e.g., Safari Private Browsing) will disable saving but the pages still load.
 - For history of UI tweaks, check `CHANGELOG.md`.
-
 
