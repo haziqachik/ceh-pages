@@ -1,0 +1,11 @@
+{
+  "name": "ceh-pages",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "format": "prettier --write README.md docs/learning-notes.md pages/study/index.html pages/1.html pages/2.html pages/3.html pages/4.html pages/5.html pages/6.html pages/7.html"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.1"
+  }
+}

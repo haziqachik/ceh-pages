@@ -1,4 +1,4 @@
-﻿# Learning Notes – CEH Practice Pages
+# Learning Notes – CEH Practice Pages
 
 ## Why I built this
 - Practice managing a messy offline archive (ExamTopics snapshots) and turn it into a structured static site.
@@ -14,3 +14,8 @@
 - Add automated Lighthouse/a11y audits to `tools/`.
 - Turn the study redirect pages into a richer curriculum index (summaries, tags, difficulty level).
 - Build a small CLI script to regenerate link maps / asset inventories when new snapshots are added.
+
+## Tooling updates
+- Added GitHub Pages + link-check CI badges.
+- Setup Prettier config (run npm install && npm run format).
+- Added automation scripts under tools/.

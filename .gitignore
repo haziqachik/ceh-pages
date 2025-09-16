@@ -1,4 +1,4 @@
-﻿# OS
+# OS
 .DS_Store
 Thumbs.db
 
@@ -8,3 +8,4 @@ Thumbs.db
 # local backups
 index.backup.html
 docs/screenshots/*.tmp
+node_modules/
