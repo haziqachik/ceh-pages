@@ -17,3 +17,7 @@
 - Plan covers directory creation, file moves, reference updates, .gitignore adjustments, and verification tasks (link scan + manual checks).
 - File: docs/analysis/refactor-plan.md captures the sequence for future execution without code changes yet.
 
+### 2025-09-16T19:42:09.6019667+08:00 Step 5 – Dry Run
+- Simulated restructure; no file moves or edits executed (0 files touched).
+- Output dry-run placeholder diff in docs/analysis/dry-run.diff.
+
