@@ -1,7 +1,21 @@
-<!doctype html><meta charset="utf-8">
-<title>Page 4</title>
-<meta http-equiv="refresh" content="0; url=../snapshots/examtopics/page-04.html">
-<script>location.replace("../snapshots/examtopics/page-04.html");</script>
-<p>Redirecting to Page 4… <a href="../snapshots/examtopics/page-04.html">click here</a></p>
-
-
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Page 4</title>
+  <noscript>
+    <meta http-equiv="refresh" content="0; url=snapshots/examtopics/page-04.html">
+  </noscript>
+</head>
+<body>
+  <p>Redirecting to Page 4. <a id="fallback-link" href="snapshots/examtopics/page-04.html">click here</a></p>
+  <script>
+  (function(){
+    var base = window.location.pathname.replace(/\/[^\/]*$/, '');
+    var target = base + '/snapshots/examtopics/page-04.html';
+    document.getElementById('fallback-link').href = target;
+    window.location.replace(target);
+  })();
+  </script>
+</body>
+</html>
