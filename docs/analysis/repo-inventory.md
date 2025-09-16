@@ -1,4 +1,4 @@
-﻿# Repository Inventory
+# Repository Inventory
 
 - .
   - .git/
@@ -1209,13 +1209,13 @@
   - 5.html
   - 6.html
   - 7.html
-  - CEH_1.pdf
-  - CEH_2.pdf
-  - CEH_3.pdf
-  - CEH_4.pdf
-  - CEH_5.pdf
-  - CEH_6.pdf
-  - CEH_7.pdf
+  - pdfs/CEH_1.pdf
+  - pdfs/CEH_2.pdf
+  - pdfs/CEH_3.pdf
+  - pdfs/CEH_4.pdf
+  - pdfs/CEH_5.pdf
+  - pdfs/CEH_6.pdf
+  - pdfs/CEH_7.pdf
   - CHANGELOG.md
   - index.backup.html
   - index.html

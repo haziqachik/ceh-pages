@@ -6,7 +6,7 @@ A single-page study hub for the Certified Ethical Hacker (CEH) practice question
 - `index.html` - landing page with the navigation grid, theme selector, timer, and tabbed notes
 - `pages/1.html` to `pages/7.html` - lightweight redirect stubs that jump into each saved ExamTopics page
 - `312-50v13 Exam - Free Actual Q&As, Page */` & `*_files/` - original HTML snapshots and their asset folders
-- `CEH_1.pdf` to `CEH_7.pdf` - companion PDF exports for quick reference
+- `pdfs/CEH_1.pdf` to `pdfs/CEH_7.pdf` - companion PDF exports for quick reference
 - `312-50v13 Exam - Free Actual Q&As CEH.zip` - bulk archive of the source download
 - `CHANGELOG.md`, `LICENSE`, `.nojekyll`, `robots.txt`, `index.backup.html` - project metadata and hosting helpers
 
@@ -34,4 +34,5 @@ A single-page study hub for the Certified Ethical Hacker (CEH) practice question
 - Content is saved for personal, educational use only. Please do not redistribute.
 - The site relies on `localStorage`; browsers that block it (e.g., Safari Private Browsing) will disable saving but the pages still load.
 - For history of UI tweaks, check `CHANGELOG.md`.
+
 
