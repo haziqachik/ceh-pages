@@ -1,16 +1,16 @@
 # CEH Practice Pages
 
-![GitHub Pages](https://img.shields.io/website?url=https%3A%2F%2Fhaziqachik.github.io%2Fceh-pages%2F) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/haziqachik/ceh-pages) ![Link Check](https://github.com/haziqachik/ceh-pages/actions/workflows/link-check.yml/badge.svg)
+![GitHub Pages](https://img.shields.io/website?url=https%3A%2F%2Fhaziqachik.github.io%2Fceh-pages%2F)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/haziqachik/ceh-pages)
+![Link Check](https://github.com/haziqachik/ceh-pages/actions/workflows/link-check.yml/badge.svg)
 
 A single-page study hub for the Certified Ethical Hacker (CEH) practice questions that I exported from ExamTopics. The page layers in UI exercises (themes, timers, notes) so I can practice frontend + DevOps skills while reviewing the material offline.
 
 ## Live Demo
-
 - https://haziqachik.github.io/ceh-pages/
 - Study index: https://haziqachik.github.io/ceh-pages/pages/study/index.html
 
 ## Release & Evidence
-
 - [Release v1.4](https://github.com/haziqachik/ceh-pages/releases/tag/v1.4)
 - [UAT Sign-off](UAT-SIGNOFF.md)
 - [Analysis & Plans](docs/analysis/)
@@ -20,13 +20,13 @@ A single-page study hub for the Certified Ethical Hacker (CEH) practice question
 
 ## Repository Structure
 - index.html – landing page with navigation grid, theme selector, timer, and tabbed notes
-- pages/study/1.html to pages/study/7.html – lightweight redirect stubs that jump into each saved ExamTopics page
+- pages/study/1.html … pages/study/7.html – lightweight redirect stubs that jump into each saved ExamTopics page
 - pages/study/index.html – curated overview + quick navigation
 - pages/snapshots/examtopics/page-0N.html – full ExamTopics HTML snapshots (kept intact for offline study)
 - ssets/img/pages/ & ssets/img/examtopics/ – normalized CSS/JS/media assets shared across study snapshots
 - pdfs/CEH_1.pdf … pdfs/CEH_7.pdf – companion PDF exports for quick reference
 - downloads/ceh-examtopics-export.zip – original ExamTopics archive (raw source download)
-- .github/workflows/pages.yml / link-check.yml – deployment + link checking CI
+- .github/workflows/pages.yml & .github/workflows/link-check.yml – deployment + link-check CI
 
 ## Features
 - Theme and font switcher with 10+ palettes to keep long sessions fresh
@@ -53,10 +53,10 @@ px serve .
 - [x] Keyboard navigation reaches all interactive elements.
 - [x] Visible focus states for links/buttons (tested in light + dark themes).
 - [x] Color contrast checked for primary body text vs. background.
-- [ ] Run Lighthouse accessibility audits periodically (see 	ools/lighthouse.md).
+- [ ] Run Lighthouse accessibility audits periodically (see [	ools/lighthouse.md](tools/lighthouse.md)).
 
 ## Development
-- Install prettier: 
+- Install dependencies: 
 pm install
 - Format key files: 
 pm run format
