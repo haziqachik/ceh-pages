@@ -12,3 +12,8 @@
 - Introduce top-level pages/, assets/, pdfs/, and downloads/ folders to separate HTML, shared static files, reference PDFs, and bulk archives.
 - Group study pages into pages/study/page-0N/ with co-located assets, and archive the raw ExamTopics snapshots under pages/snapshots/examtopics/.
 - Normalize documentation into docs/analysis, docs/reports, docs/media/screenshots/, and docs/qa/ to keep operational notes beside reports.
+### 2025-09-16T19:40:32.7699609+08:00 Step 4 – Refactor Plan
+- Drafted numbered, rerunnable steps to reshape the repo per the target structure and mapping.
+- Plan covers directory creation, file moves, reference updates, .gitignore adjustments, and verification tasks (link scan + manual checks).
+- File: docs/analysis/refactor-plan.md captures the sequence for future execution without code changes yet.
+
