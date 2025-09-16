@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -56,6 +56,8 @@
       display:flex; flex-direction:column; justify-content:space-between;
       cursor:pointer; transition:transform .08s ease, border-color .2s ease, box-shadow .2s ease;
     }
+    a.card{color:inherit; text-decoration:none;}
+    a.card:focus-visible{outline:3px solid var(--accent); outline-offset:4px;}
     .card:hover{ transform:translateY(-2px); border-color:#2a3342; box-shadow:0 6px 18px rgba(0,0,0,.35); }
     .card h3{margin:0; font-size:18px; font-weight:600}
     .range{color:var(--muted); font-size:12px}
@@ -180,6 +182,31 @@
   </div>
 
   <script>
+    /* ---------- Storage helpers ---------- */
+    function sGet(key, fallback = null){
+      try{
+        const value = localStorage.getItem(key);
+        return value === null ? fallback : value;
+      }catch(err){
+        console.warn('Storage read failed', err);
+        return fallback;
+      }
+    }
+    function sSet(key, value){
+      try{
+        localStorage.setItem(key, value);
+      }catch(err){
+        console.warn('Storage write failed', err);
+      }
+    }
+    function sDel(key){
+      try{
+        localStorage.removeItem(key);
+      }catch(err){
+        console.warn('Storage remove failed', err);
+      }
+    }
+
     /* ---------- Config ---------- */
     const totalPages = 7;
     const questionRanges = {1:"Q1–50",2:"Q51–100",3:"Q101–150",4:"Q151–200",5:"Q201–250",6:"Q251–300",7:"Q301–302"};
@@ -187,11 +214,12 @@
     /* ---------- Build grid ---------- */
     const grid = document.getElementById('grid');
     for (let i=1;i<=totalPages;i++){
-      const card = document.createElement('div');
+      const card = document.createElement('a');
       card.className = 'card';
       card.dataset.page = i;
+      card.href = `${i}.html`;
+      card.setAttribute('aria-label', `Open CEH practice page ${i} (${questionRanges[i]})`);
       card.innerHTML = `<div><h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div></div>`;
-      card.addEventListener('click',()=>openPage(i));
       grid.appendChild(card);
     }
 
@@ -205,20 +233,9 @@
         if (el) el.classList.add('bookmarked');
       }
     }
-    bm.value = localStorage.getItem('bookmark') || '';
-    bm.addEventListener('change', ()=>{ localStorage.setItem('bookmark', bm.value); updateBookmarkHighlight(); });
+    bm.value = sGet('bookmark', '');
+    bm.addEventListener('change', ()=>{ sSet('bookmark', bm.value); updateBookmarkHighlight(); });
     updateBookmarkHighlight();
-
-    /* ---------- Detect long/short page filename and open ---------- */
-    async function openPage(n){
-      const long = encodeURI(`312-50v13 Exam - Free Actual Q&As, Page ${n} _ ExamTopics.htm`);
-      const short = `pages/${n}.html`;
-      const okLong  = await fetch(long,  {method:'HEAD'}).then(r=>r.ok).catch(()=>false);
-      if (okLong)  { location.href = long;  return; }
-      const okShort = await fetch(short, {method:'HEAD'}).then(r=>r.ok).catch(()=>false);
-      if (okShort) { location.href = short; return; }
-      alert('Page not found locally.');
-    }
 
     /* ---------- Font, Theme, Cursor ---------- */
     const root = document.documentElement;
@@ -227,21 +244,21 @@
     const cursorSel = document.getElementById('cursorSel');
 
     // Font
-    fontSel.value = localStorage.getItem('fontSel') || fontSel.value;
+    fontSel.value = sGet('fontSel', fontSel.value);
     root.style.setProperty('--font', fontSel.value);
-    fontSel.onchange = ()=>{ root.style.setProperty('--font', fontSel.value); localStorage.setItem('fontSel', fontSel.value); };
+    fontSel.onchange = ()=>{ root.style.setProperty('--font', fontSel.value); sSet('fontSel', fontSel.value); };
 
     // Theme (also changes background now)
-    const savedTheme = localStorage.getItem('themeSel') || 'teal';
+    const savedTheme = sGet('themeSel', 'teal');
     document.body.dataset.theme = savedTheme;
     themeSel.value = savedTheme;
-    themeSel.onchange = ()=>{ document.body.dataset.theme = themeSel.value; localStorage.setItem('themeSel', themeSel.value); };
+    themeSel.onchange = ()=>{ document.body.dataset.theme = themeSel.value; sSet('themeSel', themeSel.value); };
 
     // Cursor
     function applyCursorState(){ document.body.classList.toggle('cursor-off', cursorSel.value==='off'); }
-    cursorSel.value = localStorage.getItem('cursorSel') || 'off';
+    cursorSel.value = sGet('cursorSel', 'off');
     applyCursorState();
-    cursorSel.onchange = ()=>{ localStorage.setItem('cursorSel', cursorSel.value); applyCursorState(); };
+    cursorSel.onchange = ()=>{ sSet('cursorSel', cursorSel.value); applyCursorState(); };
     let lastDot = 0;
     window.addEventListener('mousemove', e=>{
       if (cursorSel.value==='off') return;
@@ -258,8 +275,8 @@
     const readyText = document.getElementById('readyText');
     const timerEl = document.getElementById('timer');
     const badge = document.getElementById('badge');
-    let startTs = +localStorage.getItem('timer_start') || 0;
-    let elapsed = +localStorage.getItem('timer_elapsed') || 0;
+    let startTs = +sGet('timer_start', 0);
+    let elapsed = +sGet('timer_elapsed', 0);
     let ticking = false, rafId=0;
     function fmt(s){ const h=String(Math.floor(s/3600)).padStart(2,'0'), m=String(Math.floor(s%3600/60)).padStart(2,'0'), sec=String(Math.floor(s%60)).padStart(2,'0'); return `${h}:${m}:${sec}`; }
     function paint(){ const now=Date.now(); const secs = elapsed + (ticking ? (now - startTs)/1000 : 0); timerEl.textContent = fmt(secs); rafId = requestAnimationFrame(paint); }
@@ -268,9 +285,9 @@
       const c = color || getComputedStyle(document.documentElement).getPropertyValue('--accent');
       badge.style.background = c; badge.style.boxShadow = `0 0 8px ${c}`;
     }
-    function start(){ if(ticking) return; ticking=true; startTs = Date.now(); localStorage.setItem('timer_start', startTs); setStatus('status-studying','Studying', getComputedStyle(document.documentElement).getPropertyValue('--good')); }
-    function pause(){ if(!ticking) return; ticking=false; elapsed += (Date.now()-startTs)/1000; localStorage.setItem('timer_elapsed', elapsed); localStorage.removeItem('timer_start'); setStatus('status-paused','Paused', getComputedStyle(document.documentElement).getPropertyValue('--bad')); }
-    function reset(){ ticking=false; elapsed=0; localStorage.removeItem('timer_start'); localStorage.setItem('timer_elapsed',0); setStatus('status-ready','Ready to study!', ''); }
+    function start(){ if(ticking) return; ticking=true; startTs = Date.now(); sSet('timer_start', startTs); setStatus('status-studying','Studying', getComputedStyle(document.documentElement).getPropertyValue('--good')); }
+    function pause(){ if(!ticking) return; ticking=false; elapsed += (Date.now()-startTs)/1000; sSet('timer_elapsed', elapsed); sDel('timer_start'); setStatus('status-paused','Paused', getComputedStyle(document.documentElement).getPropertyValue('--bad')); }
+    function reset(){ ticking=false; elapsed=0; sDel('timer_start'); sSet('timer_elapsed',0); setStatus('status-ready','Ready to study!', ''); }
     readyBtn.addEventListener('click', ()=> ticking ? pause() : start());
     document.addEventListener('keydown', e=>{ if(e.key.toLowerCase()==='r')(ticking?pause():start()); if(e.key==='0') reset(); });
     if (startTs) ticking=true, setStatus('status-studying','Studying', getComputedStyle(document.documentElement).getPropertyValue('--good'));
@@ -284,15 +301,23 @@
     const savedInfo = document.getElementById('savedInfo');
 
     function loadTabs(){
-      let t = JSON.parse(localStorage.getItem('note_tabs')||'[]');
-      if(!t.length) t = ['General','Page 1','Page 2','Page 3'];
+      const storedTabs = sGet('note_tabs', '[]');
+      let t;
+      try{
+        t = JSON.parse(storedTabs);
+      }catch(err){
+        t = [];
+      }
+      if(!Array.isArray(t) || !t.length){
+        t = ['General','Page 1','Page 2','Page 3'];
+      }
       return t;
     }
-    function saveTabs(t){ localStorage.setItem('note_tabs', JSON.stringify(t)); }
+    function saveTabs(t){ sSet('note_tabs', JSON.stringify(t)); }
     function keyFor(name){ return 'note_'+name; }
 
     let tabs = loadTabs();
-    let active = localStorage.getItem('note_active') || tabs[0];
+    let active = sGet('note_active', tabs[0]);
 
     function renderTabs(){
       tabsWrap.innerHTML='';
@@ -307,22 +332,22 @@
           const idx=tabs.indexOf(name); tabs[idx]=nn;
           // move content key
           const oldKey=keyFor(name), newKey=keyFor(nn);
-          const val=localStorage.getItem(oldKey); if(val!==null){ localStorage.setItem(newKey,val); localStorage.removeItem(oldKey); }
+          const val = sGet(oldKey); if(val!==null){ sSet(newKey,val); sDel(oldKey); }
           if(active===name) active=nn;
-          saveTabs(tabs); localStorage.setItem('note_active',active);
+          saveTabs(tabs); sSet('note_active',active);
           renderTabs(); loadNote();
         };
         el.querySelector('.x').onclick = (ev)=>{
           ev.stopPropagation();
           if(!confirm(`Delete tab "${name}"?`)) return;
           const idx=tabs.indexOf(name); tabs.splice(idx,1);
-          localStorage.removeItem(keyFor(name));
+          sDel(keyFor(name));
           if(active===name) active = tabs[0] || 'General';
           if(!tabs.length){ tabs=['General']; saveTabs(tabs); }
-          saveTabs(tabs); localStorage.setItem('note_active',active);
+          saveTabs(tabs); sSet('note_active',active);
           renderTabs(); loadNote();
         };
-        el.onclick=()=>{ active=name; localStorage.setItem('note_active',active); renderTabs(); loadNote(); };
+        el.onclick=()=>{ active=name; sSet('note_active',active); renderTabs(); loadNote(); };
         tabsWrap.appendChild(el);
       });
       const add=document.createElement('button');
@@ -331,18 +356,18 @@
         const nn=prompt('New tab name');
         if(!nn) return;
         tabs.push(nn); saveTabs(tabs);
-        active=nn; localStorage.setItem('note_active',active);
+        active=nn; sSet('note_active',active);
         renderTabs(); loadNote();
       };
       tabsWrap.appendChild(add);
     }
 
-    function loadNote(){ notes.value = localStorage.getItem(keyFor(active)) || ''; savedInfo.textContent = 'Loaded '+active; }
+    function loadNote(){ notes.value = sGet(keyFor(active), ''); savedInfo.textContent = 'Loaded '+active; }
     let saveTO;
     notes.addEventListener('input', ()=>{
       clearTimeout(saveTO);
       saveTO = setTimeout(()=>{
-        localStorage.setItem(keyFor(active), notes.value);
+        sSet(keyFor(active), notes.value);
         savedInfo.textContent='Saved '+new Date().toLocaleTimeString();
       }, 300);
     });

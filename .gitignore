@@ -4,3 +4,7 @@ Thumbs.db
 
 # Editors
 .vscode/
+
+# local backups
+index.backup.html
+docs/screenshots/*.tmp

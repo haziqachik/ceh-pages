@@ -1,35 +1,36 @@
-﻿# CEH Practice Pages
+# CEH Practice Pages
 
-📌 Live demo: [View on GitHub Pages](https://haziqachik.github.io/ceh-pages/)
+A single-page study hub for the Certified Ethical Hacker (CEH) practice questions that I exported from ExamTopics. The page layers in UI exercises (themes, timers, notes) so I can practice frontend + DevOps skills while reviewing the material offline.
 
-This project organizes saved **Certified Ethical Hacker (CEH) practice pages** into a navigable study site.  
-The goal is not just to view questions offline but to **practice frontend, GitHub, and DevOps skills** while making a personal study tool.
+## Repository Structure
+- `index.html` - landing page with the navigation grid, theme selector, timer, and tabbed notes
+- `1.html` to `7.html` - lightweight redirect stubs that jump into each saved ExamTopics page
+- `312-50v13 Exam - Free Actual Q&As, Page */` & `*_files/` - original HTML snapshots and their asset folders
+- `CEH_1.pdf` to `CEH_7.pdf` - companion PDF exports for quick reference
+- `312-50v13 Exam - Free Actual Q&As CEH.zip` - bulk archive of the source download
+- `CHANGELOG.md`, `LICENSE`, `.nojekyll`, `robots.txt`, `index.backup.html` - project metadata and hosting helpers
 
----
+## Features
+- Theme and font switcher with 10+ palettes to keep long sessions fresh
+- Bookmark field that highlights the last page visited
+- Cursor trails (off, dot, comet) for a little flair
+- Study timer with start/pause/reset and status colours, persisted to local storage
+- Tabbed notes with add/rename/delete, auto-saved per tab in local storage
 
-## ✨ Features
-- 🔖 **Bookmarking** → highlight where you last left off  
-- 🎨 **Theme switcher** → teal, purple, blue, rose, amber, emerald, slate  
-- 🖱️ **Cursor effects** → dot, comet, or disabled  
-- ⏱️ **Study timer** → start/pause/reset, saves progress locally  
-- 📝 **Tabbed study notes** → add/delete/rename, saved to browser  
-- 📂 **Organized repo** → pages/, resources/, pdfs/ for clarity  
+## Setup
+1. Clone or download the repository: `git clone https://github.com/haziqachik/ceh-pages.git`
+2. Optionally unzip `312-50v13 Exam - Free Actual Q&As CEH.zip` if you want the raw export alongside the curated files.
+3. Serve the folder or open `index.html` directly:
+   - Quick static server: `npx serve .`
+   - Or open `index.html` in a browser (all links point to local files, so no network dependency).
 
----
+## Usage
+- Launch `index.html` to view the page grid; clicking a card opens the saved ExamTopics page (`1.html`-`7.html`).
+- Set a bookmark number to highlight where you plan to resume.
+- Pick a theme/font combo, toggle the cursor effect, and start the session timer when you begin studying.
+- Use the notes tabs to capture takeaways per topic; they persist automatically in the browser.
 
-## 🛠 Skills Practiced
-- Git & GitHub (branching, merging, PRs, Pages hosting)  
-- HTML/CSS/JS (themes, UI, localStorage, timers)  
-- Repo organization & static hosting  
-- Documentation & portfolio presentation  
-
----
-
-⚠️ **Notice**:  
-All pages (1–7) are saved exam practice content, used **strictly for personal, educational purposes**.  
-Not for resale, redistribution, or public sharing.  
-
----
-
-✍️ *Part of my IT learning portfolio* → [Haziq on GitHub](https://github.com/haziqachik)  
-_Last updated: 2025-09-15_
+## Notes
+- Content is saved for personal, educational use only. Please do not redistribute.
+- The site relies on `localStorage`; browsers that block it (e.g., Safari Private Browsing) will disable saving but the pages still load.
+- For history of UI tweaks, check `CHANGELOG.md`.
