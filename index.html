@@ -217,7 +217,7 @@
       const card = document.createElement('a');
       card.className = 'card';
       card.dataset.page = i;
-      card.href = `${i}.html`;
+      card.href = `pages/${i}.html`;
       card.setAttribute('aria-label', `Open CEH practice page ${i} (${questionRanges[i]})`);
       card.innerHTML = `<div><h3>Page ${i}</h3><div class="range">${questionRanges[i]}</div></div>`;
       grid.appendChild(card);

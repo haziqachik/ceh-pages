@@ -4,7 +4,7 @@ A single-page study hub for the Certified Ethical Hacker (CEH) practice question
 
 ## Repository Structure
 - `index.html` - landing page with the navigation grid, theme selector, timer, and tabbed notes
-- `1.html` to `7.html` - lightweight redirect stubs that jump into each saved ExamTopics page
+- `pages/1.html` to `pages/7.html` - lightweight redirect stubs that jump into each saved ExamTopics page
 - `312-50v13 Exam - Free Actual Q&As, Page */` & `*_files/` - original HTML snapshots and their asset folders
 - `CEH_1.pdf` to `CEH_7.pdf` - companion PDF exports for quick reference
 - `312-50v13 Exam - Free Actual Q&As CEH.zip` - bulk archive of the source download
@@ -25,7 +25,7 @@ A single-page study hub for the Certified Ethical Hacker (CEH) practice question
    - Or open `index.html` in a browser (all links point to local files, so no network dependency).
 
 ## Usage
-- Launch `index.html` to view the page grid; clicking a card opens the saved ExamTopics page (`1.html`-`7.html`).
+- Launch `index.html` to view the page grid; clicking a card opens the saved ExamTopics page (`pages/1.html`-`pages/7.html`).
 - Set a bookmark number to highlight where you plan to resume.
 - Pick a theme/font combo, toggle the cursor effect, and start the session timer when you begin studying.
 - Use the notes tabs to capture takeaways per topic; they persist automatically in the browser.
@@ -34,3 +34,4 @@ A single-page study hub for the Certified Ethical Hacker (CEH) practice question
 - Content is saved for personal, educational use only. Please do not redistribute.
 - The site relies on `localStorage`; browsers that block it (e.g., Safari Private Browsing) will disable saving but the pages still load.
 - For history of UI tweaks, check `CHANGELOG.md`.
+

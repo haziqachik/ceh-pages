@@ -35,3 +35,4 @@
 - [ ] Timer shows color-coded status
 - [ ] Bookmarks highlight correctly
 - [ ] Footer shows last updated date
+
