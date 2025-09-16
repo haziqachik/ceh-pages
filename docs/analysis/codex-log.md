@@ -7,3 +7,8 @@
 - Scanned 9 HTML files; catalogued 15 link/script/image references.
 - Missing targets: 0; external references: .
 
+
+### 2025-09-16T19:32:14.8840053+08:00 Step 3 – Proposed Structure
+- Introduce top-level pages/, assets/, pdfs/, and downloads/ folders to separate HTML, shared static files, reference PDFs, and bulk archives.
+- Group study pages into pages/study/page-0N/ with co-located assets, and archive the raw ExamTopics snapshots under pages/snapshots/examtopics/.
+- Normalize documentation into docs/analysis, docs/reports, docs/media/screenshots/, and docs/qa/ to keep operational notes beside reports.
