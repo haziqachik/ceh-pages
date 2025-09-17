@@ -21,3 +21,4 @@
 - Simulated restructure; no file moves or edits executed (0 files touched).
 - Output dry-run placeholder diff in docs/analysis/dry-run.diff.
 
+2025-09-17T14:54:43 Step 0a – Entry Points
