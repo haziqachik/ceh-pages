@@ -181,3 +181,57 @@ data-choice-letter, data-dismiss, data-gtm-form-interact-field-id, data-gtm-form
 
 ### pages/snapshots/examtopics/page-02.html - page-07.html
 - Mirror page-01.html for selector sets, functions, globals, and listener patterns (paths swap to assets/img/examtopics/page-0N/).
+
+## 0c Graphs
+
+```mermaid
+graph TD
+  IndexInline["index.html (inline logic)"]
+  RedirectInline["pages/1-7 inline redirect"]
+  SnapshotInline["pages/snapshots/examtopics page-0N inline"]
+  VendorBundles["Vendor bundles (jQuery, Bootstrap, plugins)"]
+  AnalyticsTags["Analytics tags (gtag, fbq, Clarity, VWO)"]
+
+  IndexInline -->|links cards| RedirectInline
+  RedirectInline -->|window.location.replace| SnapshotInline
+  SnapshotInline -->|calls helpers in| VendorBundles
+  SnapshotInline -->|initialises| AnalyticsTags
+```
+
+```mermaid
+graph LR
+  subgraph Dashboard_index
+    loadTabs --> sGet
+    renderTabs --> saveTabs
+    renderTabs --> keyFor
+    renderTabs -.-> loadNote
+    loadNote --> sGet
+    start --> sSet
+    start --> setStatus
+    pause --> sSet
+    pause --> sDel
+    pause --> setStatus
+    reset --> sDel
+    reset --> sSet
+    reset --> setStatus
+    paint --> fmt
+    paint --> paint
+  end
+  subgraph Snapshot_pages
+    delayedStart --> autoCompleteQuery
+    loadDiscussionIntoModal --> resetDiscussionModal
+    loadDiscussionIntoModal --> ExternalHelpers
+    moderate_comment --> ExternalHelpers
+    monthPdf --> CheckoutLinks
+    yearPdf --> CheckoutLinks
+    updateScale --> DOMWidths
+  end
+  ExternalHelpers["Vendor helpers (getQuestionObject..., enable_voted_comment)"]
+  CheckoutLinks["Checkout anchors (#Amonth/#Ayear)"]
+  DOMWidths["Progress bar span width"]
+```
+
+**Event Flow**
+- *index.html*: change@#bm -> updateBookmarkHighlight() and sSet('bookmark', ...) toggles .bookmarked state; change@#fontSel -> sSet('fontSel', ...) and update --font; change@#themeSel -> sSet('themeSel', ...) and adjust body[data-theme]; change@#cursorSel -> sSet('cursorSel', ...) and applyCursorState() with cursor trail; window mousemove (when cursor trail enabled) -> create/remove .cursor-dot/.cursor-comet nodes; click@#readyBtn -> start()/pause() toggling timer persistence and setStatus(); keydown@document (r/0) -> start()/pause()/reset(); input@#notes (debounced) -> sSet note content and update #savedInfo; tab header dblclick -> rename via saveTabs()/renderTabs()/loadNote(); tab delete click -> sDel note, saveTabs(), renderTabs(), loadNote(); tab select click -> sSet active tab, renderTabs(), loadNote(); click@.addtab -> prompt, saveTabs(), renderTabs(), loadNote().
+- *pages/1-7.html*: immediate IIFE on load -> compute snapshot URL, rewrite #fallback-link, invoke window.location.replace(target) to navigate to the snapshot copy.
+- *pages/snapshots/examtopics/page-0N.html*: delegated click on [data-popup] -> Popup.open()/close() toggling .popup_show and body lock/unlock; 1500 ms timeout -> delayedStart() attaches typeahead wired to autoCompleteQuery(); shown.bs.modal on .search-modal -> focus first text input; click on .question-discussion-button[href='#'] -> loadDiscussionIntoModal() via AJAX and show #discussion-modal; hidden.bs.modal on #discussion-modal -> resetDiscussionModal() restoring loading state; click on .approve-comment-button/.delete-comment-button/.bump-comment-button/.edit-comment-button/.comment-edit-save -> moderate_comment() or inline jQuery updates affecting discussion DOM; click on .load-full-discussion-button -> fetch more discussion markup and scroll; click on .paid-access-modal-open -> open #paid-access-modal with static backdrop; checkbox clicks in .pdf-form-control -> monthPdf()/yearPdf() adjust #Amonth/#Ayear href/text; autoresize inputs fire on input -> autoresize() reset height; analytics tags run on load initialising gtag()/fbq()/Clarity/VWO queues.

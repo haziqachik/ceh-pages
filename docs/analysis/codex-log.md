@@ -23,3 +23,4 @@
 
 2025-09-17T14:54:43 Step 0a – Entry Points
 2025-09-17T15:05:15 Step 0b – CSS/JS Mapping
+2025-09-17T15:48:48 Step 0c – JS Dependencies & Events
