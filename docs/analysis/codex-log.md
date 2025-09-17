@@ -25,3 +25,4 @@
 2025-09-17T15:05:15 Step 0b – CSS/JS Mapping
 2025-09-17T15:48:48 Step 0c – JS Dependencies & Events
 2025-09-17T17:00:51 Step 0d – JSON Export
+2025-09-17T17:12:22 Step 3 – Asset Usage
