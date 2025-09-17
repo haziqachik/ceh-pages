@@ -22,3 +22,4 @@
 - Output dry-run placeholder diff in docs/analysis/dry-run.diff.
 
 2025-09-17T14:54:43 Step 0a – Entry Points
+2025-09-17T15:05:15 Step 0b – CSS/JS Mapping
